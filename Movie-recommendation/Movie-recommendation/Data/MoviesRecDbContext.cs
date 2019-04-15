@@ -1,4 +1,4 @@
-namespace Movie_recommendation.Data
+namespace Movie_recommendation
 {
     using System;
     using System.Data.Entity;
@@ -6,21 +6,27 @@ namespace Movie_recommendation.Data
 
     public class MoviesRecDbContext : DbContext
     {
-        // Your context has been configured to use a 'MoviesRecDbContext' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'Movie_recommendation.Data.MoviesRecDbContext' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'MoviesRecDbContext' 
-        // connection string in the application configuration file.
-        public MoviesRecDbContext()
-            : base("name=MoviesRecDbContext")
+
+        #region DBSets
+        public DbSet<User> Users { set; get; }
+        public DbSet<Movie> Movies { set; get; }
+        public DbSet<Rating> Ratings { set; get; }
+        public DbSet<FavouriteMovies> FavouriteMovies { set; get; }
+        #endregion
+
+        public MoviesRecDbContext(): base("name=MoviesRecDbContext")
         {
         }
 
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasKey(s => s.id);
+            modelBuilder.Entity<Movie>().HasKey(s => s.id);
+            modelBuilder.Entity<User>().HasIndex(s => s.name);
+            modelBuilder.Entity<Movie>().HasIndex(s => s.name);
+        }
 
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
     }
 
     //public class MyEntity
