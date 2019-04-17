@@ -14,24 +14,14 @@ namespace Movie_recommendation
         public DbSet<FavouriteMovies> FavouriteMovies { set; get; }
         #endregion
 
-        public MoviesRecDbContext(): base("name=MoviesRecDbContext")
+        public MoviesRecDbContext(): base("name=MoviesRecDb")
         {
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().HasKey(s => s.id);
-            modelBuilder.Entity<Movie>().HasKey(s => s.id);
-            modelBuilder.Entity<User>().HasIndex(s => s.name);
-            modelBuilder.Entity<Movie>().HasIndex(s => s.name);
+            modelBuilder.HasDefaultSchema("MOVIEREC");
         }
 
     }
-
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
 }
