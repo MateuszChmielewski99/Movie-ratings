@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Movie_recommendation
 {
     /// <summary>
-    /// Movie ratings class
+    /// Movie ratings model
     /// </summary>
 
     [Table("MSBD2.ratings")]

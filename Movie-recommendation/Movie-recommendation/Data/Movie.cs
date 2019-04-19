@@ -10,8 +10,7 @@ using System.Windows.Controls;
 namespace Movie_recommendation
 {
     /// <summary>
-    /// Movie model class
-    /// constrains definition is split into this class and DbContext 
+    /// Movie model 
     /// </summary>
     [Table("MSBD2.movies")]
     public class Movie
