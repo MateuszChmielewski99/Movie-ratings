@@ -10,8 +10,7 @@ using System.Windows.Media;
 namespace Movie_recommendation
 {
     /// <summary>
-    /// User model class, constrains definition is split into this class and 
-    /// DbContext 
+    /// User model class
     /// </summary>
 
     [Table("MSBD2.users")]
