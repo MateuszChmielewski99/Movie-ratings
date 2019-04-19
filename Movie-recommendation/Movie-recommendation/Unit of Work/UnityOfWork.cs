@@ -8,7 +8,7 @@ namespace Movie_recommendation
     /// </summary>
     class UnitOfWork : IDisposable
     {
-        private MoviesRecDbContext context;
+        private MoviesRecDbContext context = new MoviesRecDbContext();
         private GenericRepository<Movie> _movieRepository;
         private GenericRepository<User> _userRepository;
         private GenericRepository<FavouriteMovies> _favMoviesRepository;

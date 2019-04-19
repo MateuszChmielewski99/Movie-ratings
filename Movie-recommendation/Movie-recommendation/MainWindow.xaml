@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="203,196,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="179"/>
+        <TextBox Name="LogTb" HorizontalAlignment="Left" Height="20" Margin="203,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
+        <PasswordBox Name ="PswBox" HorizontalAlignment="Left" Margin="203,206,0,0" VerticalAlignment="Top" Width="179"/>
+        <Button Content="Register" HorizontalAlignment="Left" Margin="234,254,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Label Name ="labelek"  Content="Label" HorizontalAlignment="Left" Margin="246,125,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -24,5 +24,40 @@ namespace Movie_recommendation
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new Register();
+
+            Action f = async () =>
+            {
+                 await register.RegisterUserAsync(new User
+                {
+                    id = Guid.NewGuid().ToString(),
+                    name = "Ala",
+                    password = "Ula",
+                    first_logging = true
+                });
+            };
+
+           var t = new Task(f);
+            t.Start();
+            
+            
+
+            /*
+            using (var x = new MoviesRecDbContext())
+            {
+                x.Users.Add(new User
+                {
+                    id = Guid.NewGuid().ToString(),
+                    name = LogTb.Text,
+                    password = PswBox.Password,
+                    first_logging = true
+                });
+                x.SaveChanges();
+            }
+            */
+        }
     }
 }

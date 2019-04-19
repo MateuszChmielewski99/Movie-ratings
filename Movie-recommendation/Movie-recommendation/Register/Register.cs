@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Movie_recommendation.Register
+namespace Movie_recommendation
 {
     /// <summary>
     /// User registery class
     /// </summary>
-    class Register
+    public class Register
     {
         private UnitOfWork unit;
 
@@ -25,10 +25,11 @@ namespace Movie_recommendation.Register
         /// <returns> information if registration was successful </returns>
         public async Task<bool> RegisterUserAsync(User user)
         {
-            var x = await unit.userRepository.GetAsync(s => s.id == user.id);
+            var x = await unit.userRepository.GetAsync(s => s.name == user.name);
             if (x == null)
             {
                 unit.userRepository.Insert(user);
+                await unit.Save();
                 unit.Dispose();
                 return true;
             }
