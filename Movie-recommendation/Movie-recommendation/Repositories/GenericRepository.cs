@@ -32,7 +32,7 @@ namespace Movie_recommendation
         /// <param name="includeProperties">properties to include </param>
         /// <returns> Collection of entities </returns>
 
-        public async Task<IEnumerable<TEntity>> GetAsync(
+        public async Task <IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity,bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
@@ -51,9 +51,9 @@ namespace Movie_recommendation
 
 
             if (orderBy != null)
-                return await query.ToListAsync();
+                return  await orderBy(query).ToListAsync();
             else
-                return await orderBy(query).ToListAsync();
+                return await query.ToListAsync();
         }
 
         /// <summary>

@@ -69,9 +69,9 @@ namespace Movie_recommendation
         /// Saves changes async 
         /// </summary>
         /// <returns></returns>
-        public async Task Save()
+        public void Save()
         {
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         private bool disposed = false;

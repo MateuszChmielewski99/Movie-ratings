@@ -23,13 +23,13 @@ namespace Movie_recommendation
         /// </summary>
         /// <param name="user"> user to register </param>
         /// <returns> information if registration was successful </returns>
-        public async Task<bool> RegisterUserAsync(User user)
+        public async Task <bool> RegisterUserAsync(User user)
         {
             var x = await unit.userRepository.GetAsync(s => s.name == user.name);
-            if (x == null)
+            if (x.Count() == 0)
             {
                 unit.userRepository.Insert(user);
-                await unit.Save();
+                unit.Save();
                 unit.Dispose();
                 return true;
             }

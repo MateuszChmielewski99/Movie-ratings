@@ -16,7 +16,7 @@ namespace Movie_recommendation
 
         public async Task<string> LoadUser(string name, string password)
         {
-            var x = await unit.userRepository.GetAsync(s => s.name == name);
+            var x =  await unit.userRepository.GetAsync(s => s.name == name);
             bool passwordMatch = x.Any(s => s.password == password);
             if (x == null)
                 return "User with this name does not exists";
