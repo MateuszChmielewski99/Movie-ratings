@@ -23,7 +23,7 @@ namespace Movie_recommendation
         /// </summary>
         /// <param name="user"> user to register </param>
         /// <returns> information if registration was successful </returns>
-        public async Task <bool> RegisterUserAsync(User user)
+        public async Task <string> RegisterUserAsync(User user)
         {
 
             var x = await unit.userRepository.GetAsync(s => s.name == user.name);
@@ -32,11 +32,11 @@ namespace Movie_recommendation
                 unit.userRepository.Insert(user);
                 unit.Save();
                 unit.Dispose();
-                return true;
+                return "ok";
             }
 
             unit.Dispose();
-            return false;
+            return "User already exists.";
         }
 
     }

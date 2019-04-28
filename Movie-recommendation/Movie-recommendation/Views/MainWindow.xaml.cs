@@ -14,14 +14,12 @@ namespace Movie_recommendation
         {
             InitializeComponent();
         }
+
         /// <summary>
-        /// Example of register button on click function 
-        /// register user async 
+        /// Sign in method, uses async method  
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
-
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
             Loading load = new Loading();
@@ -35,6 +33,11 @@ namespace Movie_recommendation
             );
         }
 
+        /// <summary>
+        /// Sign up method, it opens registration window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             Views.Register window = new Views.Register();
