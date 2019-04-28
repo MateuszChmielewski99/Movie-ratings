@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace Movie_recommendation
         /// <summary>
         /// movie director
         /// </summary>
+        [Required]
         public string director { set; get; }
 
         // to do, image of a movie!
@@ -39,31 +41,33 @@ namespace Movie_recommendation
         /// </summary>
         public ICollection<FavouriteMovies> favouriteMovies { set; get; }
         public ICollection<Rating> ratings { set; get; }
+        public ICollection<RecommendedMovies> recommendedMovies { set; get; }
 
         /// <summary>
-        /// movie categories to classification
+        /// movie categories to classification, false by default 
         /// </summary>
         #region movie categories
+        [DefaultValue(false)]
         public bool is_drama { set; get; }
-
+        [DefaultValue(false)]
         public bool is_comedy { set; get; }
-
+        [DefaultValue(false)]
         public bool is_thriller { set; get; }
-
+        [DefaultValue(false)]
         public bool is_horror { set; get; }
-
+        [DefaultValue(false)]
         public bool is_action { set; get; }
-
+        [DefaultValue(false)]
         public bool for_kids { set; get; }
-
+        [DefaultValue(false)]
         public bool is_fantasy { set; get; }
-
+        [DefaultValue(false)]
         public bool is_historical { set; get; }
-
+        [DefaultValue(false)]
         public bool is_crime { set; get; }
-
+        [DefaultValue(false)]
         public bool is_musical { set; get; }
-
+        [DefaultValue(false)]
         public bool is_sf { set; get; }
 
         #endregion

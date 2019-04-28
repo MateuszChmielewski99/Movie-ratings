@@ -32,7 +32,7 @@ namespace Movie_recommendation
         /// <param name="includeProperties">properties to include </param>
         /// <returns> Collection of entities </returns>
 
-        public async Task <IEnumerable<TEntity>> GetAsync(
+        public virtual async Task <IEnumerable<TEntity>> GetAsync(
             Expression<Func<TEntity,bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
@@ -62,7 +62,7 @@ namespace Movie_recommendation
         /// <param name="id"> id of entity </param>
         /// <returns> entity object </returns>
 
-        public async Task<TEntity> GetById(object id)
+        public virtual async Task<TEntity> GetByIdAsync(object id)
         {
             return await dbSet.FindAsync(id);
         }
@@ -71,7 +71,7 @@ namespace Movie_recommendation
         /// Function to insert entity into set
         /// </summary>
         /// <param name="entity"> entity to insert </param>
-        public void Insert(TEntity entity)
+        public virtual void Insert(TEntity entity)
         {
             dbSet.Add(entity);
         }
@@ -80,7 +80,7 @@ namespace Movie_recommendation
         /// Funtion to delete entity specified by its id
         /// </summary>
         /// <param name="id"> id of the entity to delete </param>
-        public void Delete(object id)
+        public virtual void Delete(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
             dbSet.Remove(entityToDelete);

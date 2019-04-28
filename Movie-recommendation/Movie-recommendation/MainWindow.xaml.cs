@@ -24,39 +24,37 @@ namespace Movie_recommendation
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Example of register button on click function 
+        /// register user async 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-            Register register = new Register();
-
-            Task t = Task.Run(async () => await register.RegisterUserAsync(new User
+            Task t = Task.Run(async () => await new Register().RegisterUserAsync(new User
             {
                 id = Guid.NewGuid().ToString(),
                 name = "Kala",
-                password = "Ma Kota",
+                password = "MaKota",
                 first_logging = true
             }));
-
-
-
-
-
-
-
-
-            ////using (var x = new UnitOfWork())
-            ////{
-            ////    x.userRepository.Insert(new User
-            ////    {
-            ////        id = Guid.NewGuid().ToString(),
-            ////        name = LogTb.Text,
-            ////        password = PswBox.Password,
-            ////        first_logging = true
-            ////    });
-            ////    x.Save();
-            ////}
-
+            
         }
+
+        private void BtnLog_Click(object sender, RoutedEventArgs e)
+        {
+            Loading load = new Loading();
+
+            Task t = Task.Run(async () => {
+                string name = TBUserName.Dispatcher.Invoke(() => TBUserName.Text);
+                string password = PBPassword.Dispatcher.Invoke(() => PBPassword.Password.ToString());
+                string tmp = await load.LoadUser(name, password);
+                LblInfo.Dispatcher.Invoke(() => LblInfo.Content = tmp);
+                }
+            ); 
+        }
+
     }
 }

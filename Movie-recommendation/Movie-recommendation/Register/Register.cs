@@ -25,6 +25,7 @@ namespace Movie_recommendation
         /// <returns> information if registration was successful </returns>
         public async Task <bool> RegisterUserAsync(User user)
         {
+
             var x = await unit.userRepository.GetAsync(s => s.name == user.name);
             if (x.Count() == 0)
             {

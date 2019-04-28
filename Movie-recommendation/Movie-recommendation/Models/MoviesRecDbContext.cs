@@ -20,7 +20,7 @@ namespace Movie_recommendation
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasDefaultSchema("MOVIEREC");
+            modelBuilder.HasDefaultSchema("MSBD2");
         }
 
     }

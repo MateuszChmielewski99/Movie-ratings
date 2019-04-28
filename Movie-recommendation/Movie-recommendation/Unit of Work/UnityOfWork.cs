@@ -8,11 +8,23 @@ namespace Movie_recommendation
     /// </summary>
     class UnitOfWork : IDisposable
     {
-        private MoviesRecDbContext context = new MoviesRecDbContext();
+        private MoviesRecDbContext _context = new MoviesRecDbContext();
         private GenericRepository<Movie> _movieRepository;
         private GenericRepository<User> _userRepository;
         private GenericRepository<FavouriteMovies> _favMoviesRepository;
         private GenericRepository<Rating> _ratingRepository;
+
+        #region context
+        public MoviesRecDbContext context
+        {
+            get
+            {
+                if (this._context == null)
+                    this._context = new MoviesRecDbContext();
+                return this._context;
+            }
+        }
+        #endregion
 
         #region properties of repos
         public GenericRepository<Movie> movieRepository
@@ -21,7 +33,7 @@ namespace Movie_recommendation
             {
                 if (this._movieRepository == null)
                 {
-                    this._movieRepository = new GenericRepository<Movie>(context);
+                    this._movieRepository = new GenericRepository<Movie>(_context);
                 }
                 return this._movieRepository;
             }
@@ -33,7 +45,7 @@ namespace Movie_recommendation
             {
                 if (this._userRepository == null)
                 {
-                    this._userRepository = new GenericRepository<User>(context);
+                    this._userRepository = new GenericRepository<User>(_context);
                 }
                 return this._userRepository;
             }
@@ -45,7 +57,7 @@ namespace Movie_recommendation
             {
                 if (this._favMoviesRepository == null)
                 {
-                    this._favMoviesRepository = new GenericRepository<FavouriteMovies>(context);
+                    this._favMoviesRepository = new GenericRepository<FavouriteMovies>(_context);
                 }
                 return this._favMoviesRepository;
             }
@@ -57,7 +69,7 @@ namespace Movie_recommendation
             {
                 if (this._ratingRepository == null)
                 {
-                    this._ratingRepository = new GenericRepository<Rating>(context);
+                    this._ratingRepository = new GenericRepository<Rating>(_context);
                 }
                 return this._ratingRepository;
             }
@@ -65,13 +77,14 @@ namespace Movie_recommendation
 
         #endregion
         
+
         /// <summary>
         /// Saves changes async 
         /// </summary>
         /// <returns></returns>
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         private bool disposed = false;
@@ -82,7 +95,7 @@ namespace Movie_recommendation
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;

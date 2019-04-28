@@ -27,7 +27,7 @@ namespace Movie_recommendation.Migrations
                     {
                         id = c.String(nullable: false, maxLength: 128),
                         title = c.String(maxLength: 100, unicode: false),
-                        director = c.String(),
+                        director = c.String(nullable: false),
                         is_drama = c.Decimal(nullable: false, precision: 1, scale: 0),
                         is_comedy = c.Decimal(nullable: false, precision: 1, scale: 0),
                         is_thriller = c.Decimal(nullable: false, precision: 1, scale: 0),
@@ -63,12 +63,26 @@ namespace Movie_recommendation.Migrations
                 c => new
                     {
                         id = c.String(nullable: false, maxLength: 128),
-                        name = c.String(maxLength: 50, unicode: false),
-                        password = c.String(),
+                        name = c.String(maxLength: 20, unicode: false),
+                        password = c.String(nullable: false, maxLength: 15),
                         first_logging = c.Decimal(nullable: false, precision: 1, scale: 0),
                     })
                 .PrimaryKey(t => t.id)
                 .Index(t => t.name);
+            
+            CreateTable(
+                "MSBD2.recommended_movies",
+                c => new
+                    {
+                        id = c.String(nullable: false, maxLength: 128),
+                        user_id = c.String(maxLength: 128),
+                        movie_id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.id)
+                .ForeignKey("MSBD2.movies", t => t.movie_id)
+                .ForeignKey("MSBD2.users", t => t.user_id)
+                .Index(t => t.user_id)
+                .Index(t => t.movie_id);
             
         }
         
@@ -77,13 +91,18 @@ namespace Movie_recommendation.Migrations
             DropForeignKey("MSBD2.favourite_movies", "user_id", "MSBD2.users");
             DropForeignKey("MSBD2.favourite_movies", "movie_id", "MSBD2.movies");
             DropForeignKey("MSBD2.ratings", "user_id", "MSBD2.users");
+            DropForeignKey("MSBD2.recommended_movies", "user_id", "MSBD2.users");
+            DropForeignKey("MSBD2.recommended_movies", "movie_id", "MSBD2.movies");
             DropForeignKey("MSBD2.ratings", "movie_id", "MSBD2.movies");
+            DropIndex("MSBD2.recommended_movies", new[] { "movie_id" });
+            DropIndex("MSBD2.recommended_movies", new[] { "user_id" });
             DropIndex("MSBD2.users", new[] { "name" });
             DropIndex("MSBD2.ratings", new[] { "movie_id" });
             DropIndex("MSBD2.ratings", new[] { "user_id" });
             DropIndex("MSBD2.movies", new[] { "title" });
             DropIndex("MSBD2.favourite_movies", new[] { "movie_id" });
             DropIndex("MSBD2.favourite_movies", new[] { "user_id" });
+            DropTable("MSBD2.recommended_movies");
             DropTable("MSBD2.users");
             DropTable("MSBD2.ratings");
             DropTable("MSBD2.movies");

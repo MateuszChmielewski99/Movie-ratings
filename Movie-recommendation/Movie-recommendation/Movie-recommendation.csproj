@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -70,8 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201904271332474_First.cs" />
+    <Compile Include="Migrations\201904271332474_First.Designer.cs">
+      <DependentUpon>201904271332474_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="Register\Register.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Test\Test.cs" />
     <Compile Include="Unit of Work\UnityOfWork.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,11 +89,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\FavouriteMovies.cs" />
-    <Compile Include="Data\Movie.cs" />
-    <Compile Include="Data\MoviesRecDbContext.cs" />
-    <Compile Include="Data\Rating.cs" />
-    <Compile Include="Data\User.cs" />
+    <Compile Include="Models\FavouriteMovies.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MoviesRecDbContext.cs" />
+    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Loading\Loading.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -93,10 +101,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201904172237152_First.cs" />
-    <Compile Include="Migrations\201904172237152_First.Designer.cs">
-      <DependentUpon>201904172237152_First.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -111,8 +115,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201904172237152_First.resx">
-      <DependentUpon>201904172237152_First.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904271332474_First.resx">
+      <DependentUpon>201904271332474_First.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

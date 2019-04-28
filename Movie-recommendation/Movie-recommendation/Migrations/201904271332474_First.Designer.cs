@@ -13,7 +13,7 @@ namespace Movie_recommendation.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201904172237152_First"; }
+            get { return "201904271332474_First"; }
         }
         
         string IMigrationMetadata.Source
