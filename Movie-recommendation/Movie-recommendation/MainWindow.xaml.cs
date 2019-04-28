@@ -20,18 +20,7 @@ namespace Movie_recommendation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            Task t = Task.Run(async () => await new Register().RegisterUserAsync(new User
-            {
-                id = Guid.NewGuid().ToString(),
-                name = "Kala",
-                password = "MaKota",
-                first_logging = true
-            }));
-            
-        }
+        
 
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
@@ -46,5 +35,10 @@ namespace Movie_recommendation
             );
         }
 
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            Views.Register window = new Views.Register();
+            window.Show();
+        }
     }
 }
