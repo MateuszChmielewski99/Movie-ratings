@@ -38,31 +38,32 @@ namespace Movie_recommendation.Views
 
             if (!passwordRegex.IsMatch(PBoxPassword.Password))
             {
-                MessageBox.Show("Password must contains upper and lowwer cases and be " +
-                    "at least 5 character long", "Password Error" ,MessageBoxButton.OK);
+                MessageBox.Show("Password must contains upper and lower cases and be " +
+                    "at least 5 characters long", "Password Error" ,MessageBoxButton.OK);
                 return;
             }
 
             if (!nameRegex.IsMatch(TBoxUserName.Text))
             {
-                MessageBox.Show("User name must contains upper and lowwer cases and be " +
-                    "at least 4 character long", "User name Error", MessageBoxButton.OK);
+                MessageBox.Show("User name must contains upper and lower cases and be " +
+                    "at least 4 characters long", "User name Error", MessageBoxButton.OK);
                 return;
             }
 
+            Window window = this;
             Task t = Task.Run(async () => 
             {
-                string response = await register.RegisterUserAsync(new User
+                bool response = await register.RegisterUserAsync(new User
                 {
                     id = Guid.NewGuid().ToString(),
                     name = TBoxUserName.Dispatcher.Invoke(() => TBoxUserName.Text),
                     password = PBoxPassword.Dispatcher.Invoke(()=> PBoxPassword.Password),
                     first_logging = true
                 });
-                if (response != "ok")
-                    InfoLabel.Dispatcher.Invoke(() => InfoLabel.Content = response);
+                if (!response)
+                    InfoLabel.Dispatcher.Invoke(() => InfoLabel.Content = "User already exists!");
                 else
-                    Close();
+                    this.Dispatcher.Invoke(window.Close);
             });
         }
     }

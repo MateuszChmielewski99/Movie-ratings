@@ -72,11 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Exceptions\InvalidUsernameException.cs" />
     <Compile Include="Migrations\201904271332474_First.cs" />
     <Compile Include="Migrations\201904271332474_First.Designer.cs">
       <DependentUpon>201904271332474_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RecommendedMovies.cs" />
+    <Compile Include="MovieRecommendator\MovieRocommendator.cs" />
     <Compile Include="Register\Register.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Test\Test.cs" />

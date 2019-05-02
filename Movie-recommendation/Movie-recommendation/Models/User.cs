@@ -27,7 +27,7 @@ namespace Movie_recommendation
         /// </summary>
         [Column(TypeName = "VARCHAR2")]
         [StringLength( maximumLength: 20,MinimumLength = 4)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z]).{4,15}$",ErrorMessage ="User name must constain lower and upper case letters")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z]).{4,15}$",ErrorMessage ="User name must contain lower and upper case letters")]
         [Index]
         public string name { set; get; }
         /// <summary>

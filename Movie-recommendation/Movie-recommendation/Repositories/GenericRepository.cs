@@ -57,7 +57,7 @@ namespace Movie_recommendation
         }
 
         /// <summary>
-        /// Function to get entity by its id
+        /// Method that gets entity by its id
         /// </summary>
         /// <param name="id"> id of entity </param>
         /// <returns> entity object </returns>

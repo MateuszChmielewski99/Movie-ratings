@@ -25,9 +25,12 @@ namespace Movie_recommendation
             Loading load = new Loading();
             Task t = Task.Run(async () =>
             {
+                // get data 
                 string name = TBUserName.Dispatcher.Invoke(() => TBUserName.Text);
                 string password = PBPassword.Dispatcher.Invoke(() => PBPassword.Password.ToString());
+                // load user 
                 string tmp = await load.LoadUser(name, password);
+                // show response 
                 LblInfo.Dispatcher.Invoke(() => LblInfo.Content = tmp);
             }
             );
