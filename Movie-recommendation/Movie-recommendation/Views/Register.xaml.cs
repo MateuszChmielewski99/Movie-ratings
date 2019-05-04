@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Movie_recommendation.Exceptions;
+using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Movie_recommendation.Views
 {
@@ -32,39 +25,51 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            Movie_recommendation.Register register = new Movie_recommendation.Register();
-            Regex passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{5,15}$");
-            Regex nameRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z]).{4,15}$");
 
-            if (!passwordRegex.IsMatch(PBoxPassword.Password))
+            Movie_recommendation.Register register = new Movie_recommendation.Register();
+
+            // Create user to sign in
+            User tmp = new User
             {
-                MessageBox.Show("Password must contains upper and lower cases and be " +
-                    "at least 5 characters long", "Password Error" ,MessageBoxButton.OK);
-                return;
+                id = Guid.NewGuid().ToString(),
+                name = TBoxUserName.Text,
+                password = PBoxPassword.Password,
+                first_logging = true
+            };
+
+            // Check if username and password are correct 
+            try
+            {
+                register.CheckUsernameAndPassword(tmp.name, tmp.password);
             }
 
-            if (!nameRegex.IsMatch(TBoxUserName.Text))
+            catch (InvalidUsernameException)
             {
                 MessageBox.Show("User name must contains upper and lower cases and be " +
-                    "at least 4 characters long", "User name Error", MessageBoxButton.OK);
+                   "at least 4 characters long", "User name Error", MessageBoxButton.OK);
+                return;
+            }
+            catch (InvalidPasswordException)
+            {
+                MessageBox.Show("Password must contains upper and lower cases and be " +
+                   "at least 5 characters long", "Password Error", MessageBoxButton.OK);
                 return;
             }
 
-            Window window = this;
+            // register user
             Task t = Task.Run(async () => 
             {
-                bool response = await register.RegisterUserAsync(new User
+                try
                 {
-                    id = Guid.NewGuid().ToString(),
-                    name = TBoxUserName.Dispatcher.Invoke(() => TBoxUserName.Text),
-                    password = PBoxPassword.Dispatcher.Invoke(()=> PBoxPassword.Password),
-                    first_logging = true
-                });
-                if (!response)
-                    InfoLabel.Dispatcher.Invoke(() => InfoLabel.Content = "User already exists!");
-                else
-                    this.Dispatcher.Invoke(window.Close);
+                    await register.SignInAsync(tmp);
+                    Dispatcher.Invoke(() => Close());
+                }
+                catch (UserExistsException ex)
+                {
+                    InfoLabel.Dispatcher.Invoke(() => InfoLabel.Content = ex.Message);
+                }
             });
+            
         }
     }
 }

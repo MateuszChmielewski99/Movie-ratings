@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Movie_recommendation.Exceptions;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Movie_recommendation
@@ -16,29 +17,29 @@ namespace Movie_recommendation
         /// <param name="name"> User name </param>
         /// <param name="password">User's password </param>
         /// <returns> String that is a message about loading </returns>
-        public async Task<string> LoadUser(string name, string password)
+        public async Task LoadUser(string name, string password)
         {
+            // Check if fields are not empty
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
             {
-                return "Empty field!";
+                throw new System.ArgumentNullException();
             }
 
-            // name is unique, using any will not cause any trouble 
-            var x =  await unit.userRepository.GetAsync(s => s.name == name);
-            bool passwordMatch = x.Any(s => s.password == password);
-            if (x.Count() == 0)
+            // Get user by his name
+            var x = await unit.userRepository.GetByNameAsync(name);
+            bool passwordMatch = x.password == password;
+            if (x == null)
             {
                 unit.Dispose();
-                return "User with this name does not exists.";
+                throw new InvalidUsernameException("User does not exists!");
             }
             if (!passwordMatch)
             {
                 unit.Dispose();
-                return "Username or password are not correct.";
+                throw new InvalidPasswordException("Username or password are inccorect!");
             }
 
             unit.Dispose();
-            return "ok";
         }
     }
 }

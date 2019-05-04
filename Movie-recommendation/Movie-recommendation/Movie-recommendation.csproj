@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="Exceptions\InvalidPasswordException.cs" />
     <Compile Include="Exceptions\InvalidUsernameException.cs" />
+    <Compile Include="Exceptions\UserExistsException.cs" />
     <Compile Include="Migrations\201904271332474_First.cs" />
     <Compile Include="Migrations\201904271332474_First.Designer.cs">
       <DependentUpon>201904271332474_First.cs</DependentUpon>
@@ -82,6 +83,7 @@
     <Compile Include="MovieRecommendator\MovieRocommendator.cs" />
     <Compile Include="Register\Register.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\UserRepositoryHelper.cs" />
     <Compile Include="Test\Test.cs" />
     <Compile Include="Unit of Work\UnityOfWork.cs" />
     <Compile Include="Views\Register.xaml.cs">

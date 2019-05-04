@@ -21,6 +21,7 @@ namespace Movie_recommendation
         /// user unique id
         /// </summary>
         [Key]
+        [DefaultValue("")]
         public string id { set; get; }
         /// <summary>
         /// user name, min length = 4 and max is 20
@@ -28,7 +29,7 @@ namespace Movie_recommendation
         [Column(TypeName = "VARCHAR2")]
         [StringLength( maximumLength: 20,MinimumLength = 4)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z]).{4,15}$",ErrorMessage ="User name must contain lower and upper case letters")]
-        [Index]
+        [Index(IsUnique =true)]
         public string name { set; get; }
         /// <summary>
         /// user password, it must be longer then 5 characters and contains small and capital letters 

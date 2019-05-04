@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Movie_recommendation.Exceptions;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -23,15 +24,32 @@ namespace Movie_recommendation
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
             Loading load = new Loading();
+
+            //get data
+            string name = TBUserName.Text;
+            string password = PBPassword.Password;
+
+
             Task t = Task.Run(async () =>
             {
-                // get data 
-                string name = TBUserName.Dispatcher.Invoke(() => TBUserName.Text);
-                string password = PBPassword.Dispatcher.Invoke(() => PBPassword.Password.ToString());
                 // load user 
-                string tmp = await load.LoadUser(name, password);
-                // show response 
-                LblInfo.Dispatcher.Invoke(() => LblInfo.Content = tmp);
+                try
+                {
+                    await load.LoadUser(name, password);
+                }
+                catch (InvalidUsernameException ex)
+                {
+                    LblInfo.Dispatcher.Invoke(() => LblInfo.Content = ex.Message);
+                }
+                catch (InvalidPasswordException ex)
+                {
+                    LblInfo.Dispatcher.Invoke(() => LblInfo.Content = ex.Message);
+                }
+                catch (ArgumentNullException)
+                {
+                    LblInfo.Dispatcher.Invoke(() => LblInfo.Content = "Empty field!" +
+                    "");
+                }
             }
             );
         }
