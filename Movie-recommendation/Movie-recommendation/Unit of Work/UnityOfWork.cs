@@ -6,7 +6,7 @@ namespace Movie_recommendation
     /// <summary>
     /// Unity of work pattern class
     /// </summary>
-    class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable
     {
         private MoviesRecDbContext _context = new MoviesRecDbContext();
         private GenericRepository<Movie> _movieRepository;
