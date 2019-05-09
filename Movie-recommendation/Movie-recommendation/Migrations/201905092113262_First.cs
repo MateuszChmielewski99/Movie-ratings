@@ -25,9 +25,10 @@ namespace Movie_recommendation.Migrations
                 "MSBD2.movies",
                 c => new
                     {
-                        id = c.String(nullable: false, maxLength: 128),
-                        title = c.String(maxLength: 100, unicode: false),
-                        director = c.String(nullable: false),
+                        ID = c.String(nullable: false, maxLength: 128),
+                        Title = c.String(maxLength: 100, unicode: false),
+                        Director = c.String(nullable: false),
+                        ImageURI = c.String(nullable: false),
                         is_drama = c.Decimal(nullable: false, precision: 1, scale: 0),
                         is_comedy = c.Decimal(nullable: false, precision: 1, scale: 0),
                         is_thriller = c.Decimal(nullable: false, precision: 1, scale: 0),
@@ -40,8 +41,8 @@ namespace Movie_recommendation.Migrations
                         is_musical = c.Decimal(nullable: false, precision: 1, scale: 0),
                         is_sf = c.Decimal(nullable: false, precision: 1, scale: 0),
                     })
-                .PrimaryKey(t => t.id)
-                .Index(t => t.title);
+                .PrimaryKey(t => t.ID)
+                .Index(t => t.Title, unique: true);
             
             CreateTable(
                 "MSBD2.ratings",
@@ -68,7 +69,7 @@ namespace Movie_recommendation.Migrations
                         first_logging = c.Decimal(nullable: false, precision: 1, scale: 0),
                     })
                 .PrimaryKey(t => t.id)
-                .Index(t => t.name);
+                .Index(t => t.name, unique: true);
             
             CreateTable(
                 "MSBD2.recommended_movies",
@@ -99,7 +100,7 @@ namespace Movie_recommendation.Migrations
             DropIndex("MSBD2.users", new[] { "name" });
             DropIndex("MSBD2.ratings", new[] { "movie_id" });
             DropIndex("MSBD2.ratings", new[] { "user_id" });
-            DropIndex("MSBD2.movies", new[] { "title" });
+            DropIndex("MSBD2.movies", new[] { "Title" });
             DropIndex("MSBD2.favourite_movies", new[] { "movie_id" });
             DropIndex("MSBD2.favourite_movies", new[] { "user_id" });
             DropTable("MSBD2.recommended_movies");

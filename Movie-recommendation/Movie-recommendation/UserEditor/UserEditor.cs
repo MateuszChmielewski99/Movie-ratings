@@ -25,7 +25,7 @@ namespace Movie_recommendation.UserEditor
 
         public void DeleteUser()
         {
-            unit.userRepository.dbSet.SqlQuery($"DELETE * FROM {"users"} WHERE id = {LoggedUser.ID} CASCADE");
+            unit.userRepository.dbSet.SqlQuery($"DELETE * FROM {"users"} WHERE id = {LoggedUser.ID} CASCADE CONSTRAINTS");
             unit.userRepository.context.SaveChanges();
             unit.Dispose();
         }
