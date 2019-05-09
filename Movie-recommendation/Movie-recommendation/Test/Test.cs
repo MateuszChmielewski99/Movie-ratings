@@ -16,7 +16,7 @@ namespace Movie_recommendation.Test
 
             IQueryable<string> tmp = ( from s in favouriteMovies select s.movie_id ) as IQueryable<string>;
 
-            IQueryable<Movie> movies = from m in unit.context.Movies where tmp.Contains(m.id) select m;
+            IQueryable<Movie> movies = from m in unit.context.Movies where tmp.Contains(m.ID) select m;
             
             unit.Dispose();
 

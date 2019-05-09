@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Movie_recommendation
 {
-    [Serializable]
+    /// <summary>
+    /// class to hold info about logged user
+    /// </summary>
+    [Serializable]    // serializable for futhure development and holding a session
     class LoggedUser
     {
-        public readonly string ID;
+        public static readonly string ID;
 
-        public LoggedUser(string ID)
-        {
-            this.ID = ID;
-        }
     }
 }

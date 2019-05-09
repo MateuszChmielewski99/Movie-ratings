@@ -87,8 +87,9 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\UserRepositoryHelper.cs" />
     <Compile Include="Test\Test.cs" />
-    <Compile Include="UIImages\UIImageProvider.cs" />
+    <Compile Include="ImagesProvider\UIImageProvider.cs" />
     <Compile Include="Unit of Work\UnityOfWork.cs" />
+    <Compile Include="UserEditor\UserEditor.cs" />
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
