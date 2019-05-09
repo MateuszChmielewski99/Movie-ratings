@@ -66,28 +66,5 @@ namespace Movie_recommendation.UIImages
         }
 
 
-        public void WrapIntoPanel(Panel panel, ICollection<Movie> movies, UIElement element = null)
-        {
-            StackPanel stack;
-            Image img;
-
-            foreach (var elem in movies)
-            {
-                stack = new StackPanel();
-                img = new Image
-                {
-                    Source = new BitmapImage(new Uri(elem.ImageURI, UriKind.Absolute))
-                };
-
-                stack.Children.Add(img);
-
-                if(element != null)
-                    stack.Children.Add(element);
-                
-
-                panel.Children.Add(stack);
-            }
-        }
-
     }
 }
