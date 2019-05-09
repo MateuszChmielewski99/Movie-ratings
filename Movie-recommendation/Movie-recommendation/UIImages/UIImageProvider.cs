@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Movie_recommendation.UIImages
@@ -42,6 +41,28 @@ namespace Movie_recommendation.UIImages
                 images.Add(img);
             }
             return images;
+        }
+
+        /// <summary>
+        /// Add action to collection of UIElements, opptionaly events on mouse enter and mouse leave
+        /// </summary>
+        /// <param name="elements"> elements to add action </param>
+        /// <param name="action"> action performed on left button clicked </param>
+        /// <param name="mouseEnter"> optional mouse enter event </param>
+        /// <param name="mouseLeave"> optional mouse leave event </param>
+        public void AddFunctionality(ICollection<UIElement> elements, MouseButtonEventHandler action, 
+            MouseEventHandler mouseEnter = null, MouseEventHandler mouseLeave = null)
+        {
+            foreach (var img in elements)
+            {
+                img.MouseLeftButtonDown += action;
+
+                if (mouseEnter != null)
+                    img.MouseEnter += mouseEnter;
+                if (mouseLeave != null)
+                    img.MouseLeave += mouseLeave;
+
+            }
         }
 
     }
