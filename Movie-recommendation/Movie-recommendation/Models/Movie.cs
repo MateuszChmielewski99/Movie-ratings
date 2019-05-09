@@ -35,7 +35,7 @@ namespace Movie_recommendation
         public string Director { set; get; }
 
         [Required]
-        string ImageURI { set; get; }
+        public string ImageURI { set; get; }
 
         /// <summary>
         /// N : M relations 
