@@ -58,9 +58,6 @@ namespace Movie_recommendation.MovieRecommendator
         public async Task<IEnumerable<Movie>>RecommendAsync(ICollection<Movie> movies)
         {
             var allMovies = await unit.movieRepository.GetAsync();
-            Movie m = new Movie();
-      
-
 
             SortedDictionary<double, Movie> topMovies = new SortedDictionary<double, Movie>();
             double simmilarity = 0;
@@ -80,8 +77,10 @@ namespace Movie_recommendation.MovieRecommendator
             }
 
              
+            if(topMovies.Values.Count >= 3)
+                return topMovies.Values.Take(3);
 
-            return topMovies.Values.Take(3);
+            return topMovies.Values.Take(topMovies.Count);
         }
     }
 }

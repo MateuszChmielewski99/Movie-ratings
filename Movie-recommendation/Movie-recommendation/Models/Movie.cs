@@ -20,21 +20,22 @@ namespace Movie_recommendation
         /// movie unique id
         /// </summary>
         [Key]
-        public string id { set; get; }
+        public string ID { set; get; }
         /// <summary>
         /// movie name
         /// </summary>
         [Column(TypeName = "VARCHAR2")]
         [StringLength(100)]
         [Index(IsUnique = true)]
-        public string title { set; get; }
+        public string Title { set; get; }
         /// <summary>
         /// movie director
         /// </summary>
         [Required]
-        public string director { set; get; }
+        public string Director { set; get; }
 
-        // to do, image of a movie!
+        [Required]
+        string ImageURI { set; get; }
 
         /// <summary>
         /// N : M relations 
