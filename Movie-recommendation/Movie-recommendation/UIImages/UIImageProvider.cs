@@ -30,7 +30,7 @@ namespace Movie_recommendation.UIImages
                 };
 
                 //setup
-                brd.BorderThickness = new System.Windows.Thickness(2);
+                brd.BorderThickness = new Thickness(2);
                 brd.Child = img;
                 img.Width = 150;
                 img.Height = 200;
@@ -62,6 +62,30 @@ namespace Movie_recommendation.UIImages
                 if (mouseLeave != null)
                     img.MouseLeave += mouseLeave;
 
+            }
+        }
+
+
+        public void WrapIntoPanel(Panel panel, ICollection<Movie> movies, UIElement element = null)
+        {
+            StackPanel stack;
+            Image img;
+
+            foreach (var elem in movies)
+            {
+                stack = new StackPanel();
+                img = new Image
+                {
+                    Source = new BitmapImage(new Uri(elem.ImageURI, UriKind.Absolute))
+                };
+
+                stack.Children.Add(img);
+
+                if(element != null)
+                    stack.Children.Add(element);
+                
+
+                panel.Children.Add(stack);
             }
         }
 
