@@ -27,12 +27,13 @@ namespace Movie_recommendation
 
             // Get user by his name
             var x = await unit.userRepository.GetByNameAsync(name);
-            bool passwordMatch = x.password == password;
             if (x == null)
             {
                 unit.Dispose();
                 throw new InvalidUsernameException("User does not exists!");
             }
+
+            bool passwordMatch = x.password == password;
             if (!passwordMatch)
             {
                 unit.Dispose();

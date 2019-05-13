@@ -46,5 +46,6 @@
                 </LinearGradientBrush>
             </Button.BorderBrush>
         </Button>
+        <Label x:Name="LbBack" Content="&lt;-----" HorizontalAlignment="Left" Height="29" Margin="10,0,0,0" VerticalAlignment="Top" Width="85" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FFB3C4FF" MouseLeftButtonDown="LbBack_MouseLeftButtonDown" MouseEnter="LbBack_MouseEnter" MouseLeave="LbBack_MouseLeave"/>
     </Grid>
 </Window>

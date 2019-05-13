@@ -8,9 +8,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_recommendation.Views"
         mc:Ignorable="d" 
-        Title="LoadingWindow" Height="332.5" Width="465.5" WindowStyle="None" ResizeMode="NoResize">
+        Title="LoadingWindow" Height="332.5" Width="440" WindowStyle="None" ResizeMode="NoResize">
     <Grid x:Name="MainGrid">
-        <Image Source="C:\Users\Asus\Desktop\koteł.png"
-               Margin="0"/>
+        <Image Height="332.5" Width="440" Source="C:\dev\private\Movie-ratings\Movie-recommendation\Movie-recommendation\Images\koteł.png"/>
     </Grid>
 </Window>

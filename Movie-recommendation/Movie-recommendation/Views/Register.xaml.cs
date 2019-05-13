@@ -1,9 +1,11 @@
 ﻿using Movie_recommendation.Exceptions;
+using Movie_recommendation.UIImages;
 using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Movie_recommendation.Views
@@ -13,8 +15,10 @@ namespace Movie_recommendation.Views
     /// </summary>
     public partial class Register : Window
     {
+        UIImageProvider provider;
         public Register()
         {
+            provider = new UIImageProvider();
             InitializeComponent();
         }
         /// <summary>
@@ -25,8 +29,7 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            LoadingWindow ln = null;
-            LoadingWindow loadingWindow = null;
+            LoadingWindow ln = new LoadingWindow();
 
             Movie_recommendation.Register register = new Movie_recommendation.Register();
 
@@ -64,11 +67,8 @@ namespace Movie_recommendation.Views
                 try
                 {
                     await register.SignInAsync(tmp);
+                    ln.Dispatcher.Invoke(()=> ln.Show(), DispatcherPriority.Normal);
                     Dispatcher.Invoke(() => Close(), DispatcherPriority.Normal);
-                    ln = new LoadingWindow();
-                    ln.Dispatcher.Invoke(()=> Show(), DispatcherPriority.Normal);
-                    loadingWindow = new LoadingWindow();
-                    loadingWindow.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
                 }
                 catch (UserExistsException ex)
                 {
@@ -76,6 +76,28 @@ namespace Movie_recommendation.Views
                 }
             });
             
+        }
+
+        private void LbBack_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainWindow mn = new MainWindow();
+            mn.Show();
+            this.Close();
+
+        }
+
+        private void LbBack_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            string hexColor = "#4C91FF";
+            var lbl = sender as Label;
+            provider.ContentControlColorChanger(lbl, hexColor);
+        }
+
+        private void LbBack_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            string hexColor = "#FFB3C4FF";
+            var lbl = sender as Label;
+            provider.ContentControlColorChanger(lbl, hexColor);
         }
     }
 }

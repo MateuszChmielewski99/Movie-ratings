@@ -25,55 +25,54 @@ namespace Movie_recommendation.Views
             InitializeComponent();
         }
 
-        private  void AddImagesAsync()
+        private async Task AddImagesAsync()
         {
-            Task t = Task.Run( async () =>
+
+            #region action
+            MouseButtonEventHandler action = (object sender, MouseButtonEventArgs e) =>
            {
-                #region action
-                MouseButtonEventHandler action = (object sender, MouseButtonEventArgs e) =>
+               var img = sender as Image;
+               this.Close();
+
+           };
+            #endregion
+
+            #region mouseOver 
+            MouseEventHandler mouseOver = (object sender, MouseEventArgs e) =>
+           {
+               Image tmp = sender as Image;
+               if (tmp != null)
                {
-                   var img = sender as Image;
-                   this.Close();
+                   Border b = tmp.Parent as Border;
+                   b.BorderBrush = Brushes.Aqua;
+               }
+           };
+            #endregion
 
-               };
-                #endregion
+            #region mouseLeave
+            MouseEventHandler mouseDown = (object sender, MouseEventArgs e) =>
+           {
 
-                #region mouseOver 
-                MouseEventHandler mouseOver = (object sender, MouseEventArgs e) =>
+               Image tmp = sender as Image;
+               if (tmp != null)
                {
-                   Image tmp = sender as Image;
-                   if (tmp != null)
-                   {
-                       Border b = tmp.Parent as Border;
-                       b.BorderBrush = Brushes.Aqua;
-                   }
-               };
-                #endregion
+                   Border b = tmp.Parent as Border;
+                   b.BorderBrush = null;
+               }
+           };
+            #endregion
 
-                #region mouseLeave
-                MouseEventHandler mouseDown = (object sender, MouseEventArgs e) =>
-               {
+            ICollection<Movie> movies = await unit.movieRepository.GetAsync();
+            var images = provider.AddToPanel(MainPanel, movies);
+            provider.AddFunctionality(images, action, mouseOver, mouseDown);
 
-                   Image tmp = sender as Image;
-                   if (tmp != null)
-                   {
-                       Border b = tmp.Parent as Border;
-                       b.BorderBrush = null;
-                   }
-               };
-                #endregion
 
-               ICollection<Movie> movies = await unit.movieRepository.GetAsync();
-               var images = provider.AddToPanel(MainPanel, movies);
-               provider.AddFunctionality(images, action, mouseOver, mouseDown);
-           });
-            
         }
 
-        
-        private  void Window_Initialized(object sender, EventArgs e)
+        [STAThread]
+        private  async void Window_Initialized(object sender, EventArgs e)
         {
-            AddImagesAsync();
+            await AddImagesAsync();
         }
 
     }

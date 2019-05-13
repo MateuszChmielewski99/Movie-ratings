@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Movie_recommendation.UIImages
@@ -65,6 +66,11 @@ namespace Movie_recommendation.UIImages
             }
         }
 
+        public void ContentControlColorChanger(ContentControl cc, string hexColor)
+        {
+            var bc = new BrushConverter();
+            cc.Foreground = bc.ConvertFrom(hexColor) as Brush;
+        }
 
     }
 }
