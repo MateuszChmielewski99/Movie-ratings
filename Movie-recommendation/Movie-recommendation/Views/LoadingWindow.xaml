@@ -1,0 +1,16 @@
+﻿<Window x:Class="Movie_recommendation.Views.LoadingWindow"
+         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        gif:ImageBehavior.AnimateInDesignMode="True"
+        WindowStartupLocation="CenterScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Movie_recommendation.Views"
+        mc:Ignorable="d" 
+        Title="LoadingWindow" Height="332.5" Width="465.5" WindowStyle="None" ResizeMode="NoResize">
+    <Grid x:Name="MainGrid">
+        <Image Source="C:\Users\Asus\Desktop\koteł.png"
+               Margin="0"/>
+    </Grid>
+</Window>

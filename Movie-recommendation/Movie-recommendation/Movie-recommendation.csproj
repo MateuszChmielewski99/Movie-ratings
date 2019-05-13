@@ -66,6 +66,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.18\lib\net\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -80,6 +83,10 @@
     <Compile Include="Migrations\201905092113262_First.Designer.cs">
       <DependentUpon>201905092113262_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905112030422_Edited_Movie_ID.cs" />
+    <Compile Include="Migrations\201905112030422_Edited_Movie_ID.Designer.cs">
+      <DependentUpon>201905112030422_Edited_Movie_ID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="MovieRecommendator\IRecommendator.cs" />
     <Compile Include="MovieRecommendator\MovieRocommendator.cs" />
@@ -87,16 +94,23 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\UserRepositoryHelper.cs" />
     <Compile Include="Test\Test.cs" />
-    <Compile Include="ImagesProvider\UIImageProvider.cs" />
+    <Compile Include="UIProvider\UIImageProvider.cs" />
     <Compile Include="Unit of Work\UnityOfWork.cs" />
     <Compile Include="UserEditor\UserEditor.cs" />
     <Compile Include="Views\AllMoviesWindow.xaml.cs">
       <DependentUpon>AllMoviesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AllMoviesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,6 +155,9 @@
     <EmbeddedResource Include="Migrations\201905092113262_First.resx">
       <DependentUpon>201905092113262_First.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905112030422_Edited_Movie_ID.resx">
+      <DependentUpon>201905112030422_Edited_Movie_ID.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -158,6 +175,8 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\loading.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

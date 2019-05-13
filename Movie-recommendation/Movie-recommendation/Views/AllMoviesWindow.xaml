@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_recommendation.Views"
         mc:Ignorable="d"
-        Title="AllMoviesWindow" Height="450" Width="800">
-    <Grid>
-        <WrapPanel x:Name="MainPanel" Background="#FF05141B" />
-
+        Title="AllMoviesWindow" Background="Black" Height="450" Width="800" Initialized="Window_Initialized" BorderBrush="Black" OpacityMask="Black" >
+    <Grid Background="#FF05141B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="381*" />
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <WrapPanel x:Name="MainPanel" Background="#FF05141B"/>
+        </ScrollViewer>
+        <Button x:Name="BtnConfirm" Content="Confirm" HorizontalAlignment="Left"  Margin="275,0,0,0" Grid.Row="1" VerticalAlignment="Bottom" Width="235.5" Height="38" Background="#FF0F2C3A" FontSize="16"/>
     </Grid>
 </Window>

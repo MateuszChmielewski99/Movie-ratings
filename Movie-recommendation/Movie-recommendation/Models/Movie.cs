@@ -20,7 +20,7 @@ namespace Movie_recommendation
         /// movie unique id
         /// </summary>
         [Key]
-        public string ID { set; get; }
+        public int ID { set; get; }
         /// <summary>
         /// movie name
         /// </summary>

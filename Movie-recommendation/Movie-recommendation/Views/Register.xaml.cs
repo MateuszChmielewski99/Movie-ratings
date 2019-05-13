@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Windows.Threading;
 
 namespace Movie_recommendation.Views
 {
@@ -25,6 +25,8 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            LoadingWindow ln = null;
+            LoadingWindow loadingWindow = null;
 
             Movie_recommendation.Register register = new Movie_recommendation.Register();
 
@@ -62,7 +64,11 @@ namespace Movie_recommendation.Views
                 try
                 {
                     await register.SignInAsync(tmp);
-                    Dispatcher.Invoke(() => Close());
+                    Dispatcher.Invoke(() => Close(), DispatcherPriority.Normal);
+                    ln = new LoadingWindow();
+                    ln.Dispatcher.Invoke(()=> Show(), DispatcherPriority.Normal);
+                    loadingWindow = new LoadingWindow();
+                    loadingWindow.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
                 }
                 catch (UserExistsException ex)
                 {

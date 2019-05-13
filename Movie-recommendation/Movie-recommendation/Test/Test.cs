@@ -14,7 +14,7 @@ namespace Movie_recommendation.Test
         {
             UnitOfWork unit = new UnitOfWork();
 
-            IQueryable<string> tmp = ( from s in favouriteMovies select s.movie_id ) as IQueryable<string>;
+            IQueryable<int> tmp = ( from s in favouriteMovies select s.movie_id ) as IQueryable<int>;
 
             IQueryable<Movie> movies = from m in unit.context.Movies where tmp.Contains(m.ID) select m;
             

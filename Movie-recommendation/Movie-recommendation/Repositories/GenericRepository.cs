@@ -32,7 +32,7 @@ namespace Movie_recommendation
         /// <param name="includeProperties">properties to include </param>
         /// <returns> Collection of entities </returns>
 
-        public virtual async Task <IEnumerable<TEntity>> GetAsync(
+        public virtual async Task <ICollection<TEntity>> GetAsync(
             Expression<Func<TEntity,bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")

@@ -17,7 +17,7 @@ namespace Movie_recommendation
         /// <param name="name"> User name </param>
         /// <param name="password">User's password </param>
         /// <returns> String that is a message about loading </returns>
-        public async Task LoadUser(string name, string password)
+        public async Task<bool>LoadUser(string name, string password)
         {
             // Check if fields are not empty
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
@@ -40,6 +40,9 @@ namespace Movie_recommendation
             }
 
             unit.Dispose();
+            return true;
         }
+
+        
     }
 }

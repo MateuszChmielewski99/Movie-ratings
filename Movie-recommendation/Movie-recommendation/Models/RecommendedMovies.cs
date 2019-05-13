@@ -25,7 +25,7 @@ namespace Movie_recommendation
         /// id of a movie that was recommended to user
         /// </summary>
         [ForeignKey("movie")]
-        public string movie_id { set; get; }
+        public int movie_id { set; get; }
 
         public User user { set; get; }
 

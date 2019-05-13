@@ -10,7 +10,7 @@ namespace Movie_recommendation.UIImages
     class UIImageProvider
     {
         /// <summary>
-        /// Method to append dynamicly images to a panel 
+        /// Append dynamicly images to a panel 
         /// </summary>
         /// <param name="panel"> panel to add images </param>
         /// <param name="movies">list of movies to add</param>
@@ -50,7 +50,7 @@ namespace Movie_recommendation.UIImages
         /// <param name="action"> action performed on left button clicked </param>
         /// <param name="mouseEnter"> optional mouse enter event </param>
         /// <param name="mouseLeave"> optional mouse leave event </param>
-        public void AddFunctionality(ICollection<UIElement> elements, MouseButtonEventHandler action, 
+        public void AddFunctionality(ICollection<Image> elements, MouseButtonEventHandler action, 
             MouseEventHandler mouseEnter = null, MouseEventHandler mouseLeave = null)
         {
             foreach (var img in elements)
