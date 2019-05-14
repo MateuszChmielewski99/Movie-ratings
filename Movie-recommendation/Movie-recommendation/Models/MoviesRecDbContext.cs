@@ -12,6 +12,7 @@ namespace Movie_recommendation
         public DbSet<Movie> Movies { set; get; }
         public DbSet<Rating> Ratings { set; get; }
         public DbSet<FavouriteMovies> FavouriteMovies { set; get; }
+        public DbSet<RecommendedMovies> RecommendedMovies { set; get; }
         #endregion
 
         public MoviesRecDbContext(): base("name=MoviesRecDb")

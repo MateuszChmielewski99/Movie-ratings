@@ -82,7 +82,9 @@ namespace Movie_recommendation
                 }
                 else
                 {
-                    //this.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
+                    ApplicationWindow applicationWindow = new ApplicationWindow();
+                    this.Dispatcher.Invoke(() => Close());
+                    applicationWindow.Dispatcher.Invoke(() => Show());
                 }
               
                 loadingWindow.Dispatcher.Invoke(() => loadingWindow.Hide(), DispatcherPriority.Normal);

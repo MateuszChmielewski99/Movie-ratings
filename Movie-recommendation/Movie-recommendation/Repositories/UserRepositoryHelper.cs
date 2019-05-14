@@ -17,42 +17,42 @@ namespace Movie_recommendation
             return await user.FirstOrDefaultAsync(s => s.name == name);
         }
 
-        public static async Task<ICollection<Movie>> GetUserMovies<T>(this GenericRepository<User> genericRepository, string id) where T : class
+        public static ICollection<Movie> GetUserFavouriteMovies(this GenericRepository<User> genericRepository, string id) 
         {
             MoviesRecDbContext context = new MoviesRecDbContext();
-            var user = await genericRepository.GetByIdAsync(id);
-            dynamic movies = null;
-            if (typeof(T) == typeof(FavouriteMovies))
-            {
-                DbSet<FavouriteMovies> dbSet = context.Set<FavouriteMovies>();
-                 movies = from m in dbSet
-                                      where m.user_id == LoggedUser.ID
-                                      select new
-                                      {
-                                          m.movie
-                                      };
-            }
-            if (typeof(T) == typeof(RecommendedMovies))
-            {
-                DbSet<RecommendedMovies> dbSet = context.Set<RecommendedMovies>();
-                movies = from m in dbSet
-                         where m.user_id == LoggedUser.ID
-                         select new
-                         {
-                             m.movie
-                         };
-            }
 
-            return movies;
+            var movies = from m in context.Movies
+                         join fv in context.FavouriteMovies
+                         on m.ID equals fv.movie_id
+                         join u in context.Users
+                         on fv.user_id equals u.id
+                         where u.id == id
+                         select m;                         
+
+            return movies.ToList();
+        }
+
+        public static ICollection<Movie> GetUserRecommendedMovies(this GenericRepository<User> genericRepository, string id)
+        {
+            MoviesRecDbContext context = new MoviesRecDbContext();
+
+            var movies = from m in context.Movies
+                         join r in context.RecommendedMovies
+                         on m.ID equals r.movie_id
+                         join u in context.Users
+                         on r.user_id equals u.id
+                         where u.id == id
+                         select m;
+
+            return movies.ToList();
         }
 
         public static int CountMovies(this GenericRepository<User> genericRepository, string id)
         {
             int count = 0;
             MoviesRecDbContext context = new MoviesRecDbContext();
-            DbSet<RecommendedMovies> DbSet = context.Set<RecommendedMovies>();
 
-            count = DbSet.Where(s => s.user_id == id).Count();
+            count = context.RecommendedMovies.Where(s => s.user_id == id).Count();
             return count;
         }
     }

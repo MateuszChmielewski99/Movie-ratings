@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Movie_recommendation.UIImages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,27 @@ namespace Movie_recommendation.Views
     /// </summary>
     public partial class ApplicationWindow : Window
     {
+        private UIImageProvider provider;
         public ApplicationWindow()
         {
+            provider = new UIImageProvider();
             InitializeComponent();
         }
+
+        private void LblAllMovies_MouseEnter(object sender, MouseEventArgs e)
+        {
+            string hexColor = "#4C91FF";
+            var lbl = sender as Label;
+            provider.ContentControlColorChanger(lbl, hexColor);
+        }
+
+        private void LblAllMovies_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string hexColor = "#FFB3C4FF";
+            var lbl = sender as Label;
+            provider.ContentControlColorChanger(lbl, hexColor);
+        }
+
+       
     }
 }
