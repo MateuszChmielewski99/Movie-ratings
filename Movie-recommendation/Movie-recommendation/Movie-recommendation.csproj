@@ -92,6 +92,7 @@
     <Compile Include="MovieRecommendator\MovieRocommendator.cs" />
     <Compile Include="Register\Register.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\MovieRepositoryHelper.cs" />
     <Compile Include="Repositories\UserRepositoryHelper.cs" />
     <Compile Include="Test\Test.cs" />
     <Compile Include="UIProvider\UIImageProvider.cs" />

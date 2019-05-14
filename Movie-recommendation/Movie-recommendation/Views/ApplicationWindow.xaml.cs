@@ -1,17 +1,9 @@
 ﻿using Movie_recommendation.UIImages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Movie_recommendation.Views
 {
@@ -21,9 +13,11 @@ namespace Movie_recommendation.Views
     public partial class ApplicationWindow : Window
     {
         private UIImageProvider provider;
+        private UnitOfWork unit;
         public ApplicationWindow()
         {
             provider = new UIImageProvider();
+            unit = new UnitOfWork();
             InitializeComponent();
         }
 
@@ -41,6 +35,40 @@ namespace Movie_recommendation.Views
             provider.ContentControlColorChanger(lbl, hexColor);
         }
 
-       
+        private async void LblAllMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ICollection<Movie> movies = await unit.movieRepository.GetAsync();
+            if (MainWrap.Children.Count == 0)
+                provider.AddToPanel(MainWrap, movies);
+            else
+            {
+                MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
+                provider.AddToPanel(MainWrap, movies);
+            }
+        }
+
+        private void LblFavouriteMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ICollection<Movie> movies = unit.userRepository.GetUserFavouriteMovies(LoggedUser.ID);
+            if (MainWrap.Children.Count == 0)
+                provider.AddToPanel(MainWrap, movies);
+            else
+            {
+                MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
+                provider.AddToPanel(MainWrap, movies);
+            }
+        }
+
+        private void LblRecommendedMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ICollection<Movie> movies = unit.userRepository.GetUserRecommendedMovies(LoggedUser.ID);
+            if (MainWrap.Children.Count == 0)
+                provider.AddToPanel(MainWrap, movies);
+            else
+            {
+                MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
+                provider.AddToPanel(MainWrap, movies);
+            }
+        }
     }
 }

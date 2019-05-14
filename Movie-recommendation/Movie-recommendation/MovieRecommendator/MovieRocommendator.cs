@@ -23,7 +23,7 @@ namespace Movie_recommendation.MovieRecommendator
         /// <param name="firstMovie"></param>
         /// <param name="secondMovie"></param>
         /// <returns></returns>
-        public double MeasureSimmilarity(Movie firstMovie, Movie secondMovie)
+        private double MeasureSimmilarity(Movie firstMovie, Movie secondMovie)
         {
             double result = 0;
             int sumF = 0;

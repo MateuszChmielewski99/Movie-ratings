@@ -1,4 +1,6 @@
-﻿using Movie_recommendation.UIImages;
+﻿using Movie_recommendation.MovieRecommendator;
+using Movie_recommendation.Repositories;
+using Movie_recommendation.UIImages;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,49 +20,65 @@ namespace Movie_recommendation.Views
     {
         UIImageProvider provider;
         UnitOfWork unit;
+        ICollection<Movie> movieToRecommed;
+        IRecommendator recommendator;
         public AllMoviesWindow()
         {
             provider = new UIImageProvider();
             unit = new UnitOfWork();
+            movieToRecommed = new List<Movie>();
             InitializeComponent();
+            recommendator = new MovieRocommendator(unit);
         }
 
         private async Task AddImagesAsync()
         {
 
-            #region action
-            MouseButtonEventHandler action = (object sender, MouseButtonEventArgs e) =>
-           {
-               var img = sender as Image;
-               this.Close();
-
-           };
-            #endregion
-
             #region mouseOver 
             MouseEventHandler mouseOver = (object sender, MouseEventArgs e) =>
-           {
-               Image tmp = sender as Image;
-               if (tmp != null)
-               {
-                   Border b = tmp.Parent as Border;
-                   b.BorderBrush = Brushes.Aqua;
-               }
-           };
+            {
+                Image tmp = sender as Image;
+                if (tmp != null)
+                {
+                    Border b = tmp.Parent as Border;
+                    b.BorderBrush = Brushes.Aqua;
+                }
+            };
             #endregion
 
             #region mouseLeave
             MouseEventHandler mouseDown = (object sender, MouseEventArgs e) =>
-           {
+            {
 
-               Image tmp = sender as Image;
-               if (tmp != null)
+                Image tmp = sender as Image;
+                if (tmp != null)
+                {
+                    Border b = tmp.Parent as Border;
+                    b.BorderBrush = null;
+                }
+            };
+            #endregion
+
+            #region action
+            MouseButtonEventHandler action = async (object sender, MouseButtonEventArgs e) =>
+           {
+               var img = sender as Image;
+               if (img != null)
                {
-                   Border b = tmp.Parent as Border;
-                   b.BorderBrush = null;
+                   Movie movie = await unit.movieRepository.GetByTitle(img.Name);
+                   movieToRecommed.Add(movie);
+                   Border b = img.Parent as Border;
+                   b.BorderBrush = Brushes.Gold;
+                   img.MouseLeave -= mouseDown;
+                   img.MouseEnter -= mouseOver;
                }
+
            };
             #endregion
+
+           
+
+            
 
             ICollection<Movie> movies = await unit.movieRepository.GetAsync();
             var images = provider.AddToPanel(MainPanel, movies);

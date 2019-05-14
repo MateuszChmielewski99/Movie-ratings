@@ -27,7 +27,8 @@ namespace Movie_recommendation.UIImages
                 brd = new Border();
                 img = new Image
                 {
-                    Source = new BitmapImage(new Uri(m.ImageURI, UriKind.Absolute))
+                    Source = new BitmapImage(new Uri(m.ImageURI, UriKind.Absolute)),
+                    Name = m.Title
                 };
 
                 //setup
