@@ -73,10 +73,9 @@ namespace Movie_recommendation
                     unit = new UnitOfWork();
                     User tmp = await unit.userRepository.GetByNameAsync(name);
 
-                    if (tmp.first_logging)
+                    if (unit.userRepository.CountMovies(tmp.id) == 0)
                     {
-                        tmp.first_logging = false;
-                        unit.userRepository.Update(tmp);
+                        LoggedUser.ID = tmp.id;
                         allMovies.Dispatcher.Invoke(() => allMovies.Show(), DispatcherPriority.Normal);
                         this.Dispatcher.Invoke(() => Close());
                     }
@@ -85,6 +84,7 @@ namespace Movie_recommendation
                 {
                     //this.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
                 }
+              
                 loadingWindow.Dispatcher.Invoke(() => loadingWindow.Hide(), DispatcherPriority.Normal);
             }
             );

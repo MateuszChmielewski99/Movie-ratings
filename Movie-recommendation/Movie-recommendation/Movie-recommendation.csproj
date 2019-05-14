@@ -100,6 +100,9 @@
     <Compile Include="Views\AllMoviesWindow.xaml.cs">
       <DependentUpon>AllMoviesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ApplicationWindow.xaml.cs">
+      <DependentUpon>ApplicationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoadingWindow.xaml.cs">
       <DependentUpon>LoadingWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AllMoviesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

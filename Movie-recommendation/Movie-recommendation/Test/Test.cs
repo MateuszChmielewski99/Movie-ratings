@@ -20,7 +20,15 @@ namespace Movie_recommendation.Test
             
             unit.Dispose();
 
-            return movies as ICollection<Movie>;
+
+            var moviez = from m in unit.context.FavouriteMovies
+            where m.user_id == LoggedUser.ID
+            select new 
+            {
+                m.movie
+            };
+
+            return moviez as ICollection<Movie>;
         }
     }
 }

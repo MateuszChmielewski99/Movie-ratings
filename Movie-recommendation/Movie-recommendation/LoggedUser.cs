@@ -12,7 +12,18 @@ namespace Movie_recommendation
     [Serializable]    // serializable for futhure development and holding a session
     class LoggedUser
     {
-        public static readonly string ID;
+        public static string ID
+        {
+            get { return ID; }
+            set
+            {
+                if (String.IsNullOrEmpty(ID))
+                {
+                    ID = value;
+                }
+                return;
+            }
+        }
 
     }
 }
