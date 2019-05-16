@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -55,11 +56,11 @@ namespace Movie_recommendation.MovieRecommendator
         /// </summary>
         /// <param name="movies">Collection of movies on which recommendation will take place </param>
         /// <returns> ICollection of top 3 recommended movies </returns>
-        public async Task<IEnumerable<Movie>>RecommendAsync(ICollection<Movie> movies)
+        public async Task<ICollection<Movie>>RecommendAsync(ICollection<Movie> movies)
         {
             var allMovies = await unit.movieRepository.GetAsync();
 
-            SortedDictionary<double, Movie> topMovies = new SortedDictionary<double, Movie>();
+            Dictionary<Movie, double> topMovies = new Dictionary<Movie, double>();
             double simmilarity = 0;
 
 
@@ -70,17 +71,23 @@ namespace Movie_recommendation.MovieRecommendator
                     if (!movie.Equals(innerMovie))
                     {
                         simmilarity = MeasureSimmilarity(movie, innerMovie);
-                        if (simmilarity > 0.9)
-                            topMovies.Add(simmilarity, innerMovie);
+                        if (simmilarity > 0.8 && topMovies.ContainsKey(innerMovie))
+                            topMovies.Add(innerMovie, simmilarity);
                     }
                 }
             }
 
-             
-            if(topMovies.Values.Count >= 3)
-                return topMovies.Values.Take(3);
+           
+            var ord = topMovies.OrderBy(s => s.Value);
+            ICollection<Movie> toRet = new List<Movie>();
 
-            return topMovies.Values.Take(topMovies.Count);
+            foreach (KeyValuePair<Movie, double> kv in ord)
+                toRet.Add(kv.Key);
+
+            if (toRet.Count >= 3)
+                return toRet.Take(3).ToList();
+
+            return toRet.Take(topMovies.Count).ToList();
         }
     }
 }

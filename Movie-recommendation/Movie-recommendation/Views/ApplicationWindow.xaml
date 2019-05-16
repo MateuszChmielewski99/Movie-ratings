@@ -22,7 +22,7 @@
         <Label x:Name="LblFavouriteMovies" Content="Favourite &#xD;&#xA;movies" HorizontalAlignment="Left" Height="49" Margin="10,11,0,0" Grid.Row="2" VerticalAlignment="Top" Width="108" FontSize="16" Foreground="#FFB3C4FF" MouseEnter="LblAllMovies_MouseEnter" MouseLeave="LblAllMovies_MouseLeave" MouseLeftButtonDown="LblFavouriteMovies_MouseLeftButtonDown"/>
         <Label x:Name="LblRecommendedMovies" Content="Recommended&#xD;&#xA;movies" HorizontalAlignment="Left" Height="59" Margin="10,1,0,0" Grid.Row="3" VerticalAlignment="Top" Width="108" Foreground="#FFB3C4FF" FontSize="16" MouseEnter="LblAllMovies_MouseEnter" MouseLeave="LblAllMovies_MouseLeave" MouseLeftButtonDown="LblRecommendedMovies_MouseLeftButtonDown"/>
         <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" VerticalAlignment="Stretch">
-            <WrapPanel x:Name="MainWrap"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            <WrapPanel x:Name="MainWrap"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="#FF041E2B"/>
         </ScrollViewer>
 
     </Grid>

@@ -8,7 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Linq;
+using System.Windows.Threading;
 
 namespace Movie_recommendation.Views
 {
@@ -18,12 +19,17 @@ namespace Movie_recommendation.Views
     /// </summary>
     public partial class AllMoviesWindow : Window
     {
-        UIImageProvider provider;
-        UnitOfWork unit;
-        ICollection<Movie> movieToRecommed;
-        IRecommendator recommendator;
+        private LoadingWindow ld;
+        private ApplicationWindow ap;
+        private UIImageProvider provider;
+        private UnitOfWork unit;
+        private ICollection<Movie> movieToRecommed;
+        private IRecommendator recommendator;
+        private bool choosen = false;
         public AllMoviesWindow()
         {
+            ap = new ApplicationWindow(); 
+            ld = new LoadingWindow();
             provider = new UIImageProvider();
             unit = new UnitOfWork();
             movieToRecommed = new List<Movie>();
@@ -34,56 +40,43 @@ namespace Movie_recommendation.Views
         private async Task AddImagesAsync()
         {
 
-            #region mouseOver 
-            MouseEventHandler mouseOver = (object sender, MouseEventArgs e) =>
-            {
-                Image tmp = sender as Image;
-                if (tmp != null)
-                {
-                    Border b = tmp.Parent as Border;
-                    b.BorderBrush = Brushes.Aqua;
-                }
-            };
-            #endregion
-
-            #region mouseLeave
-            MouseEventHandler mouseDown = (object sender, MouseEventArgs e) =>
-            {
-
-                Image tmp = sender as Image;
-                if (tmp != null)
-                {
-                    Border b = tmp.Parent as Border;
-                    b.BorderBrush = null;
-                }
-            };
-            #endregion
+           
 
             #region action
             MouseButtonEventHandler action = async (object sender, MouseButtonEventArgs e) =>
            {
+
                var img = sender as Image;
+               choosen = !choosen;
+
                if (img != null)
                {
                    Movie movie = await unit.movieRepository.GetByTitle(img.Name);
-                   movieToRecommed.Add(movie);
                    Border b = img.Parent as Border;
-                   b.BorderBrush = Brushes.Gold;
-                   img.MouseLeave -= mouseDown;
-                   img.MouseEnter -= mouseOver;
+                   if (choosen)
+                   {
+                       if(!movieToRecommed.Contains(movie))
+                            movieToRecommed.Add(movie);
+
+                       b.BorderBrush = Brushes.Gold;
+                       img.MouseLeave -= provider.mouseDown;
+                       img.MouseEnter -= provider.mouseOver;
+                   }
+                   else
+                   {
+                       movieToRecommed.Remove(movie);
+                       b.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF05141B"));
+                       img.MouseLeave += provider.mouseDown;
+                       img.MouseEnter += provider.mouseOver;
+                   }
                }
 
            };
             #endregion
 
-           
-
-            
-
             ICollection<Movie> movies = await unit.movieRepository.GetAsync();
             var images = provider.AddToPanel(MainPanel, movies);
-            provider.AddFunctionality(images, action, mouseOver, mouseDown);
-
+            provider.AddFunctionality(images, action);
 
         }
 
@@ -93,5 +86,30 @@ namespace Movie_recommendation.Views
             await AddImagesAsync();
         }
 
+
+        private async void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            
+               ld.Show();
+            
+               List<Movie> mov = (await recommendator.RecommendAsync(movieToRecommed)).ToList();
+
+               foreach (var rec in mov)
+               {
+                   unit.recommendedMoviesRepository.Insert(new RecommendedMovies
+                   {
+                       id = Guid.NewGuid().ToString(),
+                       movie_id = rec.ID,
+                       user_id = LoggedUser.ID
+                   });
+                   unit.Save();
+            }
+                
+
+               ld.Dispatcher.Invoke(() => ld.Close(), DispatcherPriority.Normal );
+               ap.Dispatcher.Invoke(() => ap.Show(), DispatcherPriority.Normal);
+           
+            this.Close();
+        }
     }
 }

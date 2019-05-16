@@ -15,11 +15,13 @@ namespace Movie_recommendation
     /// </summary>
     public partial class MainWindow : Window
     {
-        LoadingWindow loadingWindow;
-        AllMoviesWindow allMovies;
-        UIImageProvider provider; 
+        private LoadingWindow loadingWindow;
+        private AllMoviesWindow allMovies;
+        private UIImageProvider provider;
+        private ApplicationWindow applicationWindow;
         public MainWindow()
         {
+            applicationWindow = new ApplicationWindow();
             InitializeComponent();
             loadingWindow = new LoadingWindow();
             allMovies = new AllMoviesWindow();
@@ -33,6 +35,7 @@ namespace Movie_recommendation
         /// <param name="e"></param>
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
+            
             Loading load = new Loading();
             UnitOfWork unit = null;
             
@@ -50,7 +53,7 @@ namespace Movie_recommendation
                 // load user 
                 try
                 {
-                   result = await load.LoadUser(name, password);
+                    result = await load.LoadUser(name, password);
                 }
                 catch (InvalidUsernameException ex)
                 {
@@ -67,38 +70,42 @@ namespace Movie_recommendation
                     this.Dispatcher.Invoke(() => Show());
                     LblInfo.Dispatcher.Invoke(() => LblInfo.Content = "Empty field!");
                 }
+                finally
+                {
+                    loadingWindow.Dispatcher.Invoke(() => loadingWindow.Hide(), DispatcherPriority.Normal);
+                }
 
                 if (result)
                 {
                     unit = new UnitOfWork();
+                   
+
                     User tmp = await unit.userRepository.GetByNameAsync(name);
+                    LoggedUser.ID = tmp.id;
 
                     if (unit.userRepository.CountMovies(tmp.id) == 0)
                     {
-                        LoggedUser.ID = tmp.id;
                         allMovies.Dispatcher.Invoke(() => allMovies.Show(), DispatcherPriority.Normal);
                         this.Dispatcher.Invoke(() => Close());
                     }
                 }
                 else
                 {
-                    ApplicationWindow applicationWindow = new ApplicationWindow();
-                    this.Dispatcher.Invoke(() => Close());
-                    applicationWindow.Dispatcher.Invoke(() => Show());
+                    this.Dispatcher.Invoke(() => Hide());
+                    applicationWindow.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
                 }
               
-                loadingWindow.Dispatcher.Invoke(() => loadingWindow.Hide(), DispatcherPriority.Normal);
+               
             }
             );
 
-            
         }
 
         #region Register label color methods
         private void Label_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Views.Register window = new Views.Register();
-            this.Hide();
+            this.Close();
             window.Show();
         }
 

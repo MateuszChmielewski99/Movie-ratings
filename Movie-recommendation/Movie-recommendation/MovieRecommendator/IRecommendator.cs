@@ -8,6 +8,6 @@ namespace Movie_recommendation.MovieRecommendator
 {
     interface IRecommendator
     {
-        Task<IEnumerable<Movie>> RecommendAsync(ICollection<Movie> movies);
+        Task<ICollection<Movie>> RecommendAsync(ICollection<Movie> movies);
     }
 }

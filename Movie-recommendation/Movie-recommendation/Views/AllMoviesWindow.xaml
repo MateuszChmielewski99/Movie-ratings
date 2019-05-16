@@ -14,6 +14,6 @@
         <ScrollViewer>
             <WrapPanel x:Name="MainPanel" Background="#FF05141B"/>
         </ScrollViewer>
-        <Button x:Name="BtnConfirm" Content="Confirm" HorizontalAlignment="Left"  Margin="275,0,0,0" Grid.Row="1" VerticalAlignment="Bottom" Width="235.5" Height="38" Background="#FF0F2C3A" FontSize="16"/>
+        <Button x:Name="BtnConfirm" Content="Confirm" HorizontalAlignment="Left"  Margin="275,0,0,0" Grid.Row="1" VerticalAlignment="Bottom" Width="235.5" Height="38" Background="#FF0F2C3A" FontSize="16" Click="BtnConfirm_Click"/>
     </Grid>
 </Window>

@@ -13,6 +13,7 @@ namespace Movie_recommendation
         private GenericRepository<User> _userRepository;
         private GenericRepository<FavouriteMovies> _favMoviesRepository;
         private GenericRepository<Rating> _ratingRepository;
+        private GenericRepository<RecommendedMovies> _recommendedMovies;
 
         #region context
         public MoviesRecDbContext context
@@ -48,6 +49,18 @@ namespace Movie_recommendation
                     this._userRepository = new GenericRepository<User>(_context);
                 }
                 return this._userRepository;
+            }
+        }
+
+        public GenericRepository<RecommendedMovies> recommendedMoviesRepository
+        {
+            get
+            {
+                if (this._userRepository == null)
+                {
+                    this._recommendedMovies = new GenericRepository<RecommendedMovies>(_context);
+                }
+                return this._recommendedMovies;
             }
         }
 
