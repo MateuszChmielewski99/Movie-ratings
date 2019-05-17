@@ -25,7 +25,6 @@ namespace Movie_recommendation.Views
         private UnitOfWork unit;
         private ICollection<Movie> movieToRecommed;
         private IRecommendator recommendator;
-        private bool choosen = false;
         public AllMoviesWindow()
         {
             ap = new ApplicationWindow(); 
@@ -45,27 +44,26 @@ namespace Movie_recommendation.Views
             #region action
             MouseButtonEventHandler action = async (object sender, MouseButtonEventArgs e) =>
            {
-
+               
                var img = sender as Image;
-               choosen = !choosen;
+              
 
                if (img != null)
                {
                    Movie movie = await unit.movieRepository.GetByTitle(img.Name);
                    Border b = img.Parent as Border;
-                   if (choosen)
-                   {
-                       if(!movieToRecommed.Contains(movie))
-                            movieToRecommed.Add(movie);
 
+                   if (!movieToRecommed.Any(m => m.ID == movie.ID))
+                   {
+                       movieToRecommed.Add(movie);
                        b.BorderBrush = Brushes.Gold;
                        img.MouseLeave -= provider.mouseDown;
                        img.MouseEnter -= provider.mouseOver;
                    }
                    else
                    {
-                       movieToRecommed.Remove(movie);
-                       b.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF05141B"));
+                       movieToRecommed.Remove(movieToRecommed.First(s => s.ID == movie.ID));
+                       b.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#FF05141B"));
                        img.MouseLeave += provider.mouseDown;
                        img.MouseEnter += provider.mouseOver;
                    }
@@ -103,11 +101,12 @@ namespace Movie_recommendation.Views
                        user_id = LoggedUser.ID
                    });
                    unit.Save();
-            }
-                
+               }
 
                ld.Dispatcher.Invoke(() => ld.Close(), DispatcherPriority.Normal );
                ap.Dispatcher.Invoke(() => ap.Show(), DispatcherPriority.Normal);
+
+
            
             this.Close();
         }

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Movie_recommendation.MovieRecommendator
 {
    
@@ -60,18 +61,18 @@ namespace Movie_recommendation.MovieRecommendator
         {
             var allMovies = await unit.movieRepository.GetAsync();
 
-            Dictionary<Movie, double> topMovies = new Dictionary<Movie, double>();
+            Dictionary<Movie, double> topMovies = null;
             double simmilarity = 0;
-
 
             foreach (Movie movie in movies)
             {
                 foreach (Movie innerMovie in allMovies)
                 {
-                    if (!movie.Equals(innerMovie))
+                    if (movie.ID != innerMovie.ID)
                     {
+                        topMovies = new Dictionary<Movie, double>();
                         simmilarity = MeasureSimmilarity(movie, innerMovie);
-                        if (simmilarity > 0.8 && topMovies.ContainsKey(innerMovie))
+                        if (simmilarity > 0.8) 
                             topMovies.Add(innerMovie, simmilarity);
                     }
                 }
@@ -85,9 +86,15 @@ namespace Movie_recommendation.MovieRecommendator
                 toRet.Add(kv.Key);
 
             if (toRet.Count >= 3)
+            {
                 return toRet.Take(3).ToList();
 
-            return toRet.Take(topMovies.Count).ToList();
+            }
+            else
+            {
+                return toRet.Take(topMovies.Count).ToList();
+                // Made By Mastr of Mind
+            }
         }
     }
 }

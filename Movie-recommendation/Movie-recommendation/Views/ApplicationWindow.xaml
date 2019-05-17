@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Movie_recommendation.Views"
         mc:Ignorable="d"
         Title="ApplicationWindow" Height="450" Width="800">
-    <Grid Background="#FF05141B">
+    <Grid x:Name="MainGrid" Background="#FF05141B">
         <Grid.RowDefinitions>
             <RowDefinition Height="86*"/>
             <RowDefinition Height="69*"/>
@@ -15,12 +15,12 @@
             <RowDefinition Height="123*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="647*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="LblAllMovies" Content="All movies" HorizontalAlignment="Left" Height="40" Margin="10,20,0,0" VerticalAlignment="Top" Width="108" FontSize="16" Foreground="#FFB3C4FF" MouseEnter="LblAllMovies_MouseEnter" MouseLeave="LblAllMovies_MouseLeave" Grid.Row="1" MouseLeftButtonDown="LblAllMovies_MouseLeftButtonDown"/>
-        <Label x:Name="LblFavouriteMovies" Content="Favourite &#xD;&#xA;movies" HorizontalAlignment="Left" Height="49" Margin="10,11,0,0" Grid.Row="2" VerticalAlignment="Top" Width="108" FontSize="16" Foreground="#FFB3C4FF" MouseEnter="LblAllMovies_MouseEnter" MouseLeave="LblAllMovies_MouseLeave" MouseLeftButtonDown="LblFavouriteMovies_MouseLeftButtonDown"/>
-        <Label x:Name="LblRecommendedMovies" Content="Recommended&#xD;&#xA;movies" HorizontalAlignment="Left" Height="59" Margin="10,1,0,0" Grid.Row="3" VerticalAlignment="Top" Width="108" Foreground="#FFB3C4FF" FontSize="16" MouseEnter="LblAllMovies_MouseEnter" MouseLeave="LblAllMovies_MouseLeave" MouseLeftButtonDown="LblRecommendedMovies_MouseLeftButtonDown"/>
+        <Label x:Name="LblAllMovies" Content="All movies" HorizontalAlignment="Left" Height="40" Margin="10,20,0,0" VerticalAlignment="Top" Width="108" FontSize="16" Foreground="#FFB3C4FF" MouseMove="LblAllMovies_MouseEnter" Grid.Row="1" MouseLeftButtonDown="LblAllMovies_MouseLeftButtonDown" MouseLeave="LblAllMovies_MouseLeave"/>
+        <Label x:Name="LblFavouriteMovies" Content="Favourite &#xD;&#xA;movies" HorizontalAlignment="Left" Height="49" Margin="10,11,0,0" Grid.Row="2" VerticalAlignment="Top" Width="108" FontSize="16" Foreground="#FFB3C4FF" MouseMove="LblAllMovies_MouseEnter"  MouseLeftButtonDown="LblFavouriteMovies_MouseLeftButtonDown" MouseLeave="LblAllMovies_MouseLeave"/>
+        <Label x:Name="LblRecommendedMovies" Content="Recommended&#xD;&#xA;movies" HorizontalAlignment="Left" Height="59" Margin="10,1,0,0" Grid.Row="3" VerticalAlignment="Top" Width="127.5" Foreground="#FFB3C4FF" FontSize="16" MouseMove="LblAllMovies_MouseEnter" MouseLeftButtonDown="LblRecommendedMovies_MouseLeftButtonDown" MouseLeave="LblAllMovies_MouseLeave"/>
         <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" VerticalAlignment="Stretch">
             <WrapPanel x:Name="MainWrap"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Background="#FF041E2B"/>
         </ScrollViewer>

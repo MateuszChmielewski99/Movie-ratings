@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,6 +38,7 @@ namespace Movie_recommendation.UIImages
                 brd.Child = img;
                 img.Width = 150;
                 img.Height = 200;
+                brd.Margin = new Thickness(2);
 
                 //add to panel
                 panel.Children.Add(brd);
@@ -83,7 +85,7 @@ namespace Movie_recommendation.UIImages
                 }
 
                 if (mouseEnter != null)
-                    img.MouseEnter += mouseEnter;
+                    img.MouseMove += mouseEnter;
 
                 if (mouseLeave != null)
                     img.MouseLeave += mouseLeave;
@@ -100,6 +102,24 @@ namespace Movie_recommendation.UIImages
         {
             var bc = new BrushConverter();
             cc.Foreground = bc.ConvertFrom(hexColor) as Brush;
+        }
+
+        public void ChangeOne(Panel panel,Label toChange, string hexColor,string newHexColor, MouseEventHandler action, MouseEventHandler mouseEnter)
+        {
+            foreach (var lbl in panel.Children.OfType<Label>())
+            {
+                if (!lbl.Equals(toChange))
+                {
+                    ContentControlColorChanger(lbl, hexColor);
+                    lbl.MouseLeave += action;
+                    lbl.MouseMove += mouseEnter;
+                }
+            }
+
+            ContentControlColorChanger(toChange, newHexColor);
+            toChange.MouseLeave -= action;
+            toChange.MouseMove -= mouseEnter;
+            
         }
 
         #region mouseOver 

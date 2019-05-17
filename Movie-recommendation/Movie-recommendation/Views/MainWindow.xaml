@@ -10,9 +10,9 @@
 
     <Grid Background="#FF05141B">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="109*" />
-            <ColumnDefinition Width="274*" />
-            <ColumnDefinition Width="83*" />
+            <ColumnDefinition Width="47*" />
+            <ColumnDefinition Width="165*" />
+            <ColumnDefinition Width="21*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="42*" />
@@ -29,11 +29,11 @@
                 </LinearGradientBrush>
             </Button.BorderBrush>
         </Button>
-        <PasswordBox x:Name="PBPassword" Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="244" BorderBrush="#FF96D1E8" Background="#FFC8E0EC"/>
+        <PasswordBox x:Name="PBPassword" Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="244" BorderBrush="#FF96D1E8" Background="#FFC8E0EC" KeyDown="PBPassword_KeyDown"/>
         <Label x:Name="LabelTitle" Content="Movie Recommendator " HorizontalAlignment="Left" Height="26" Margin="27,10,0,0" VerticalAlignment="Top" Width="195" FontFamily="Source Code Pro Light" FontSize="16" FontStyle="Italic" Grid.Column="1" Foreground="#FFB3C4FF"/>
-        <Label x:Name="LblInfo" Content="" HorizontalAlignment="Left" Height="24" Margin="92,77.893,0,0" Grid.Row="3" VerticalAlignment="Top" Width="291" FontSize="14" FontFamily="Source Code Pro Light" FontWeight="SemiBold" Foreground="#FFDA1A1A" Grid.ColumnSpan="2" />
-        <Label Content="User name:" HorizontalAlignment="Left" Height="28" Margin="26.333,30.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="72.667" Background="#FF05141B" Foreground="#FFB3C4FF"/>
-        <Label x:Name="LblPassword" Content="Password: " HorizontalAlignment="Left" Height="28" Margin="26.333,13,0,0" Grid.Row="2" VerticalAlignment="Top" Width="72.667" Background="#FF05141B" Foreground="#FFB3C4FF"/>
+        <Label x:Name="LblInfo" Content="" HorizontalAlignment="Left" Height="24" Margin="92,77.893,0,0" Grid.Row="3" VerticalAlignment="Top" Width="322" FontSize="14" FontFamily="Source Code Pro Light" FontWeight="SemiBold" Foreground="#FFDA1A1A" Grid.ColumnSpan="2" />
+        <Label Content="User name:" HorizontalAlignment="Left" Height="28" Margin="26.333,30.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="72.667" Background="#FF05141B" Foreground="#FFB3C4FF" Grid.ColumnSpan="2"/>
+        <Label x:Name="LblPassword" Content="Password: " HorizontalAlignment="Left" Height="28" Margin="26.333,13,0,0" Grid.Row="2" VerticalAlignment="Top" Width="72.667" Background="#FF05141B" Foreground="#FFB3C4FF" Grid.ColumnSpan="2"/>
         <Label x:Name="LbRegister" Content="Or sign up for free..." Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="65.192,46.893,0,0" Grid.Row="3" VerticalAlignment="Top" Width="137.422" MouseLeftButtonDown="Label_MouseLeftButtonDown" FontSize="14" Background="#FF05141B" Foreground="#FFB3C4FF" MouseEnter="LbRegister_MouseEnter" MouseLeave="LbRegister_MouseLeave"/>
     </Grid>
 </Window>

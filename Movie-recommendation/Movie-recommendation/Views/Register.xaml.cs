@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Movie_recommendation.Views
@@ -67,11 +68,12 @@ namespace Movie_recommendation.Views
             // register user
             Task t = Task.Run(async () => 
             {
+                bool response = false;
                 try
                 {
                     loadingWindow.Dispatcher.Invoke(() => loadingWindow.Show(), DispatcherPriority.Normal);
                     Dispatcher.Invoke(() => Hide(), DispatcherPriority.Normal);
-                    await register.SignInAsync(tmp); 
+                     response = await register.SignInAsync(tmp); 
                 }
                 catch (UserExistsException ex)
                 {
@@ -83,7 +85,8 @@ namespace Movie_recommendation.Views
                     loadingWindow.Dispatcher.Invoke(() => loadingWindow.Hide(), DispatcherPriority.Normal);
                 }
 
-                loading.Dispatcher.Invoke(() => loading.Show());
+                if (response)
+                    loading.Dispatcher.Invoke(() => loading.Show());
 
             });
             
@@ -109,6 +112,12 @@ namespace Movie_recommendation.Views
             string hexColor = "#FFB3C4FF";
             var lbl = sender as Label;
             provider.ContentControlColorChanger(lbl, hexColor);
+        }
+
+        private void PBoxPassword_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                BtnSubmit_Click(sender, e);
         }
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -88,12 +89,13 @@ namespace Movie_recommendation
                         allMovies.Dispatcher.Invoke(() => allMovies.Show(), DispatcherPriority.Normal);
                         this.Dispatcher.Invoke(() => Close());
                     }
+                    else
+                    {
+                        this.Dispatcher.Invoke(() => Hide());
+                        applicationWindow.Dispatcher.Invoke(() => applicationWindow.Show(), DispatcherPriority.Normal);
+                    }
                 }
-                else
-                {
-                    this.Dispatcher.Invoke(() => Hide());
-                    applicationWindow.Dispatcher.Invoke(() => Show(), DispatcherPriority.Normal);
-                }
+               
               
                
             }
@@ -123,7 +125,13 @@ namespace Movie_recommendation
             provider.ContentControlColorChanger(lbl,hexColor);   
         }
 
-        
+
         #endregion
+
+        private void PBPassword_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                BtnLog_Click(sender,e);
+        }
     }
 }

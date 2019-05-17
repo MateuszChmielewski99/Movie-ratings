@@ -17,12 +17,15 @@ namespace Movie_recommendation.Views
     {
         private UIImageProvider provider;
         private UnitOfWork unit;
+
+        #region Constructor
         public ApplicationWindow()
-        {
+        { 
             provider = new UIImageProvider();
             unit = new UnitOfWork();
             InitializeComponent();
         }
+        #endregion
 
         #region mouse enter and leave methods 
         private void LblAllMovies_MouseEnter(object sender, MouseEventArgs e)
@@ -48,6 +51,11 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private async void LblAllMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Label tmp = sender as Label;
+            string basicColour = "#FFB3C4FF";
+            string newColour = "#42f474";
+            if (tmp != null)
+                provider.ChangeOne(MainGrid, tmp, basicColour, newColour, LblAllMovies_MouseLeave, LblAllMovies_MouseEnter);
 
             ICollection<Movie> movies = await unit.movieRepository.GetAsync();
             string header = "Add to favourite";
@@ -70,6 +78,12 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private void LblFavouriteMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Label tmp = sender as Label;
+            string basicColour = "#FFB3C4FF";
+            string newColour = "#42f474";
+            if (tmp != null)
+                provider.ChangeOne(MainGrid, tmp, basicColour, newColour, LblAllMovies_MouseLeave, LblAllMovies_MouseEnter);
+
             ICollection<Movie> movies = unit.userRepository.GetUserFavouriteMovies(LoggedUser.ID);
             ICollection<Image> images;
             string header = "Delete";
@@ -92,12 +106,21 @@ namespace Movie_recommendation.Views
         /// <param name="e"></param>
         private void LblRecommendedMovies_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Label tmp = sender as Label;
+            string basicColour = "#FFB3C4FF";
+            string newColour = "#42f474";
+            if (tmp != null)
+                provider.ChangeOne(MainGrid, tmp,basicColour, newColour, LblAllMovies_MouseLeave, LblAllMovies_MouseEnter);
+
+
             ICollection<Movie> movies = unit.userRepository.GetUserRecommendedMovies(LoggedUser.ID);
-            if (MainWrap.Children.Count != 0)
-                MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
-                
+            if (movies != null)
+            {
+                if (MainWrap.Children.Count != 0)
+                    MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
+
                 provider.AddToPanel(MainWrap, movies);
-            
+            }
         }
 
         /// <summary>
@@ -156,8 +179,18 @@ namespace Movie_recommendation.Views
                 unit.favMowieRepository.Delete(fvm.First());
                 unit.Save();
 
-                LblFavouriteMovies_MouseLeftButtonDown(img, null);
+                //LblFavouriteMovies_MouseLeftButtonDown(img, null);
+                ICollection<Movie> movies = unit.userRepository.GetUserFavouriteMovies(LoggedUser.ID);
+                if (MainWrap.Children.Count == 0)
+                    provider.AddToPanel(MainWrap, movies);
+                else
+                {
+                    MainWrap.Children.RemoveRange(0, MainWrap.Children.Count);
+                    provider.AddToPanel(MainWrap, movies);
+                }
             }
         }
+
+       
     }
 }

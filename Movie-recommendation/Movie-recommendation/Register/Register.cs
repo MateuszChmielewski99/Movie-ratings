@@ -53,7 +53,7 @@ namespace Movie_recommendation
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task SignInAsync(User user)
+        public async Task<bool> SignInAsync(User user)
         {
             User x = await unit.userRepository.GetByNameAsync(user.name);
             if (x == null)
@@ -61,6 +61,7 @@ namespace Movie_recommendation
                 unit.userRepository.Insert(user);
                 unit.Save();
                 unit.Dispose();
+                return true;
             }
             else
             {
