@@ -43,7 +43,6 @@ namespace Movie_recommendation.Views
                 id = Guid.NewGuid().ToString(),
                 name = TBoxUserName.Text,
                 password = PBoxPassword.Password,
-                first_logging = true
             };
 
             // Check if username and password are correct 

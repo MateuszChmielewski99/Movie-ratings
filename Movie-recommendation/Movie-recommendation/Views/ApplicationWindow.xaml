@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_recommendation.Views"
         mc:Ignorable="d"
-        Title="ApplicationWindow" Height="450" Width="800">
+        Title="ApplicationWindow" Height="450" Width="851">
     <Grid x:Name="MainGrid" Background="#FF05141B">
         <Grid.RowDefinitions>
             <RowDefinition Height="86*"/>

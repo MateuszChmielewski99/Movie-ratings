@@ -31,6 +31,7 @@ namespace Movie_recommendation
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z]).{4,15}$",ErrorMessage ="User name must contain lower and upper case letters")]
         [Index(IsUnique =true)]
         public string name { set; get; }
+
         /// <summary>
         /// user password, it must be longer then 5 characters and contains small and capital letters 
         /// and numbers as well
@@ -39,12 +40,7 @@ namespace Movie_recommendation
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{5,15}$")]
         [Required]
         public string password { set; get; }
-
-        /// <summary>
-        /// check if user was logged before to show corect window 
-        /// </summary>
-        [DefaultValue(true)]
-        public bool first_logging { set; get; }
+       
 
         /// <summary>
         /// N:M relation 

@@ -14,6 +14,22 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Asus\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +51,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7E13BF2B2B15F423990E46EF96A627396668521D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Movie-recommendation_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -86,6 +114,14 @@
     <Compile Include="Migrations\201905112030422_Edited_Movie_ID.cs" />
     <Compile Include="Migrations\201905112030422_Edited_Movie_ID.Designer.cs">
       <DependentUpon>201905112030422_Edited_Movie_ID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905180844383_UpdatedUser.cs" />
+    <Compile Include="Migrations\201905180844383_UpdatedUser.Designer.cs">
+      <DependentUpon>201905180844383_UpdatedUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905180932055_DeletedIndexFromFavouriteMovies.cs" />
+    <Compile Include="Migrations\201905180932055_DeletedIndexFromFavouriteMovies.Designer.cs">
+      <DependentUpon>201905180932055_DeletedIndexFromFavouriteMovies.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="MovieRecommendator\IRecommendator.cs" />
@@ -166,10 +202,17 @@
     <EmbeddedResource Include="Migrations\201905112030422_Edited_Movie_ID.resx">
       <DependentUpon>201905112030422_Edited_Movie_ID.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905180844383_UpdatedUser.resx">
+      <DependentUpon>201905180844383_UpdatedUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905180932055_DeletedIndexFromFavouriteMovies.resx">
+      <DependentUpon>201905180932055_DeletedIndexFromFavouriteMovies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Movie-recommendation_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -188,6 +231,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\koteł.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 i x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 
-
 namespace Movie_recommendation.Views
 {
     /// <summary>
@@ -136,23 +135,29 @@ namespace Movie_recommendation.Views
 
 
             if (mi != null)
-                 img = ((ContextMenu)mi.Parent).PlacementTarget as Image;
-            
-            if (img != null)
-                 movie = await unit.movieRepository.GetByTitle(img.Name);
+                img = ((ContextMenu)mi.Parent).PlacementTarget as Image;
 
-            if (movie != null)
+            if (img != null)
+                movie = await unit.movieRepository.GetByTitle(img.Name);
+
+            var tmp = await unit.favMowieRepository.GetAsync(s => s.movie_id == movie.ID);
+            if (tmp.Count == 0 && movie != null)
             {
+
                 unit.favMowieRepository.Insert(new FavouriteMovies
                 {
-                    id = Guid.NewGuid().ToString(),
-                    user_id = LoggedUser.ID,
-                    movie_id = movie.ID
+                id = Guid.NewGuid().ToString(),
+                user_id = LoggedUser.ID,
+                movie_id = movie.ID
                 });
-                unit.Save();
-            }
 
+                unit.Save();
+                
+            }
         }
+            
+
+        
 
         /// <summary>
         /// Deletes image from favourites and refreshes main wrap panel 

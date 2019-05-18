@@ -26,7 +26,6 @@ namespace Movie_recommendation
         /// </summary>
         [Column(TypeName = "VARCHAR2")]
         [StringLength(100)]
-        [Index(IsUnique = true)]
         public string Title { set; get; }
         /// <summary>
         /// movie director

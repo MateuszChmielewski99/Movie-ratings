@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Movie_recommendation.Views"
         mc:Ignorable="d"
-        Title="AllMoviesWindow" Background="Black" Height="450" Width="800" Initialized="Window_Initialized" BorderBrush="Black" OpacityMask="Black" >
+        Title="AllMoviesWindow" Background="Black" Height="450" Width="857" Initialized="Window_Initialized" BorderBrush="Black" OpacityMask="Black" Loaded="Window_Loaded" >
     <Grid Background="#FF05141B">
         <Grid.RowDefinitions>
             <RowDefinition Height="381*" />

@@ -58,15 +58,17 @@ namespace Movie_recommendation.Views
                        movieToRecommed.Add(movie);
                        b.BorderBrush = Brushes.Gold;
                        img.MouseLeave -= provider.mouseDown;
-                       img.MouseEnter -= provider.mouseOver;
+                       img.MouseMove -= provider.mouseOver;
                    }
                    else
                    {
                        movieToRecommed.Remove(movieToRecommed.First(s => s.ID == movie.ID));
                        b.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#FF05141B"));
                        img.MouseLeave += provider.mouseDown;
-                       img.MouseEnter += provider.mouseOver;
+                       img.MouseMove += provider.mouseOver;
                    }
+                      
+                   
                }
 
            };
@@ -74,7 +76,7 @@ namespace Movie_recommendation.Views
 
             ICollection<Movie> movies = await unit.movieRepository.GetAsync();
             var images = provider.AddToPanel(MainPanel, movies);
-            provider.AddFunctionality(images, action);
+            provider.AddFunctionality(images, action,provider.mouseOver,provider.mouseDown);
 
         }
 
@@ -82,33 +84,51 @@ namespace Movie_recommendation.Views
         private  async void Window_Initialized(object sender, EventArgs e)
         {
             await AddImagesAsync();
+           
         }
 
 
         private async void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             
-               ld.Show();
+            ld.Show();
             
-               List<Movie> mov = (await recommendator.RecommendAsync(movieToRecommed)).ToList();
+            List<Movie> mov = (await recommendator.RecommendAsync(movieToRecommed)).ToList();
 
-               foreach (var rec in mov)
-               {
-                   unit.recommendedMoviesRepository.Insert(new RecommendedMovies
-                   {
+            foreach (var movie in movieToRecommed)
+            {
+                unit.favMowieRepository.Insert(new FavouriteMovies
+                {
+                    id = Guid.NewGuid().ToString(),
+                    movie_id = movie.ID,
+                    user_id = LoggedUser.ID
+                });
+
+                unit.Save();
+            }
+
+            foreach (var rec in mov)
+            {
+                unit.recommendedMoviesRepository.Insert(new RecommendedMovies
+                {
                        id = Guid.NewGuid().ToString(),
                        movie_id = rec.ID,
                        user_id = LoggedUser.ID
-                   });
-                   unit.Save();
-               }
+                });
+                unit.Save();
+            }
 
-               ld.Dispatcher.Invoke(() => ld.Close(), DispatcherPriority.Normal );
-               ap.Dispatcher.Invoke(() => ap.Show(), DispatcherPriority.Normal);
+             ld.Dispatcher.Invoke(() => ld.Close(), DispatcherPriority.Normal );
+             ap.Dispatcher.Invoke(() => ap.Show(), DispatcherPriority.Normal);
 
-
+            unit.Dispose();
            
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Please choose at least 3 favourite movies", "Movies", MessageBoxButton.OK);
         }
     }
 }
