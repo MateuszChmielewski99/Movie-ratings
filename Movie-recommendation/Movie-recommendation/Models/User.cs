@@ -14,7 +14,7 @@ namespace Movie_recommendation
     /// User model class
     /// </summary>
 
-    [Table("MSBD2.users")]
+    [Table("MSBD40.users")]
     public class User
     {
         /// <summary>

@@ -13,7 +13,7 @@ namespace Movie_recommendation
     /// <summary>
     /// Movie model 
     /// </summary>
-    [Table("MSBD2.movies")]
+    [Table("MSBD40.movies")]
     public class Movie
     {
         /// <summary>

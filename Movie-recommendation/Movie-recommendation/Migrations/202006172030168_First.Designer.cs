@@ -7,13 +7,13 @@ namespace Movie_recommendation.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Edited_Movie_ID : IMigrationMetadata
+    public sealed partial class First : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Edited_Movie_ID));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905112030422_Edited_Movie_ID"; }
+            get { return "202006172030168_First"; }
         }
         
         string IMigrationMetadata.Source

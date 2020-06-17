@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Movie_recommendation
 {
-    [Table("MSBD2.recommended_movies")]
+    [Table("MSBD40.recommended_movies")]
     public class RecommendedMovies
     {
         /// <summary>

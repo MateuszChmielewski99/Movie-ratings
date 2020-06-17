@@ -7,7 +7,7 @@ namespace Movie_recommendation
     /// Movie ratings model
     /// </summary>
 
-    [Table("MSBD2.ratings")]
+    [Table("MSBD40.ratings")]
     public class Rating
     {
         /// <summary>

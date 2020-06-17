@@ -8,7 +8,7 @@ namespace Movie_recommendation
     /// Favourite movie model
     /// </summary>
 
-    [Table("MSBD2.favourite_movies")]
+    [Table("MSBD40.favourite_movies")]
     public class FavouriteMovies
     {
         /// <summary>
